@@ -1,10 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import "../../style/matrix.css";
 import { Link } from "react-router-dom";
 import { apiUrl } from "../Config";
-import { useAccount } from "wagmi";
+// import { useAccount } from "wagmi";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { getBalance } from "viem/actions";
+import { getUSDT } from "../web3";
+import "../../style/dashboard.css";
+// import { FaLock } from "react-icons/fa";
+import { IoIosLock } from "react-icons/io";
+import { MdOutlineDoneOutline } from "react-icons/md";
+// import { buySlot, checkAllowance, getActiveSlotData,  } from "../web3";
+import toast from "react-hot-toast";
+// import { getBalance } from "@wagmi/core";
+import {
+  buyPackage,
+  // checkAllowance,
+  getOwner,
+  // getUSDT,
+  tokenApprove,
+  UserExist,
+} from "../web3";
+import { useNavigate } from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
+import { useAccount, useChainId } from "wagmi";
+import { setWalletDetails } from "../../Redux/Slice";
+import { TokenAddres } from "../Config.js";
+import { config } from "../../main.jsx";
 // import { useHighlighted } from "@mui/x-charts";
 
 const MatrixTree = () => {
@@ -72,6 +95,25 @@ const MatrixTree = () => {
   }, [address,add,slot]);
   console.log(blocks, "block");
 
+  const slots = [
+    { id: 1, price: 7, name: "Community Member" },
+    { id: 2, price: 7, name: "Beginner" },
+    { id: 3, price: 14, name: "Seeker" },
+    { id: 4, price: 14, name: "Engager" },
+    { id: 5, price: 28, name: "Motivator" },
+    { id: 6, price: 28, name: "Explorer" },
+    { id: 7, price: 56, name: "Soldier" },
+    { id: 8, price: 56, name: "Promoter" },
+    { id: 9, price: 112, name: "Advisor" },
+    { id: 10, price: 112, name: "Director" },
+    { id: 11, price: 224, name: "Achiever" },
+    { id: 12, price: 224, name: "Creator" },
+    { id: 13, price: 448, name: "Mentor" },
+    { id: 14, price: 896, name: "Expert" },
+    { id: 15, price: 1792, name: "Master" },
+    { id: 16, price: 3584, name: "Community Legend" },
+  ];
+
   return (
     <>
       <div className="main-content app-content">
@@ -108,7 +150,7 @@ const MatrixTree = () => {
                 </button>
               </div>
 
-              <div className="btn-group align-self-end mb-3">
+              {/* <div className="btn-group align-self-end mb-3">
                 <button
                   type=""
                   className="btn btn-primary-gradient btn-packages "
@@ -334,7 +376,7 @@ const MatrixTree = () => {
                     </li>
                   </div>
                 </ul>
-              </div>
+              </div> */}
               
 
               <div className="mgt-container">
@@ -386,6 +428,39 @@ const MatrixTree = () => {
                   </div>
                 </div>
               </div>
+            <div className="col-sm-12 col-lg-12">
+                    <div>
+                      <div className="card custom-card school-card" style={{margin: "0"}}>
+                        <div
+                          className="card-body d-flex gap-2 justify-content-between "
+                          style={{ height: "150px" }}
+                        >
+                          
+                          <div className="carousel-container bg-crypto-balance" style={{borderRadius: "20px"}}>
+                            <div className="carousel">
+                              {slots.map((slot) => {
+                                return (
+                                  <a
+                                    href="#"
+                                    key={slot.id}
+                                    className={`product-card bg-crypto-balance bg-success slot-menu`} 
+                                    onClick={()=>setSlot(slot.id)}
+                                  >
+                                    <div
+                                      className="carousel-card-value carousel-card-value carousel-card-value-sucess"
+                                      style={{ height: "30px", fontSize: "15px" }}
+                                    >
+                                      {slot.name}
+                                    </div>   
+                                  </a>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
             </section>
           </div>
         </div>

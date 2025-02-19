@@ -189,7 +189,7 @@ h1 {
   width: 80px;
   background-color: #000;
   border-radius: 50%;
-  z-index: 100;
+  z-index: 99;
   border: 6px double #fff;  
   background-image: url("/Tether Ocean1.png");
   background-position: center;
@@ -601,4 +601,12 @@ h1 {
 }
 .side-menu__label{
   padding: 0;
+}
+.slot-menu{
+  height: 100%;
+}
+@media (max-width: 768px) {
+  .slot-menu {
+      width: 10.5em;
+  }
 }
