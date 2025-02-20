@@ -171,7 +171,7 @@ function SignUp() {
       // }
 
       const ownerAddress = await getOwner();
-
+      console.log({ownerAddress})
       const refAddressSet = !refAddress ? ownerAddress : refAddress;
 
       console.log(refAddressSet, "ref::::");
