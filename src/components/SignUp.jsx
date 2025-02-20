@@ -198,12 +198,12 @@ function SignUp() {
 
       const walletBalance = parseFloat(balance.formatted);
 
-      if (walletBalance < amt) {
-        console.log(walletBalance, amt);
-        setIsLoading(false);
-        toast.error("Insufficient Balance");
-        return;
-      }
+      // if (walletBalance < amt) {
+      //   console.log(walletBalance, amt);
+      //   setIsLoading(false);
+      //   toast.error("Insufficient Balance");
+      //   return;
+      // }
 
       // if (!isChecked) {
       //   setIsLoading(false);
@@ -213,14 +213,14 @@ function SignUp() {
       // }
       // console.log("a a");
 
-      const allowance = await checkAllowance(address, Taddress);
+      // const allowance = await checkAllowance(address, Taddress);
       // console.log("a a4");
-      let appRes;
-      if (amt > allowance / Number("1e" + tokenDecimals)) {
-        appRes = await appToken(amt, Taddress, tokenDecimals);
-      } else {
-        appRes = true;
-      }
+      let appRes = true;
+      // if (amt > allowance / Number("1e" + tokenDecimals)) {
+      //   appRes = await appToken(amt, Taddress, tokenDecimals);
+      // } else {
+      //   appRes = true;
+      // }
 
       if (appRes) {
         const buy = buyPackage(refAddressSet, amt, tokenDecimals);
