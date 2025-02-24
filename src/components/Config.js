@@ -1,4 +1,5 @@
-export const ContractAddress = "0x6fe54B6bEB17BfF8B915399aa7B9fc74fe9A2a04";
+export const ContractAddress = localStorage.getItem('CONTRACT_ADDRESS');
+console.log({ContractAddress})
 export const ContractABI = [
   {
     anonymous: false,
