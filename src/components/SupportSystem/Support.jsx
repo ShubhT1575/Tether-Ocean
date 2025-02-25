@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../style/Support.css";
 import chatImg from "../../assets/img/chat.png";
-import socket from "../Soket/Soket";
 import { useSelector } from "react-redux";
 import { formatTime, getAmPm, getTicketList, raiseTicket } from "../../API/Api";
 import "./Support.css";

@@ -14,10 +14,21 @@ const MatrixTree = () => {
   const [accessAdress, setAccessAddress] = useState("");
   const { dashboardData } = useSelector((state) => state.bitgold);
   const { userId } = dashboardData;
+  const [childAdd, setChildAdd] = useState();
+  const [childUser, setChildUser] = useState();
+  
+  const handleClick = (childAdd , childUser)=>{
+    // console.log(childAdd, "childAdd");
+    if(childAdd){
+    setChildAdd(childAdd)
+    setChildUser(childUser)
+    }
+    // console.log(childAdd, "childAdd");
+  }
 
   useEffect(() => {
     const res = new URLSearchParams(window.location.search);
-    // https://usdtocean.io/api/uwn1?user=0x13eF67AF092A521370A97FCC5cc26fBB109DDEbc&slot=1
+    // https://usdtocean.io/api/uwn2?user=0x13eF67AF092A521370A97FCC5cc26fBB109DDEbc&slot=1
     if (res.has("accessAddress")) {
       const ref = res.get("accessAddress");
       console.log(ref, "redddddfffff");
@@ -32,18 +43,19 @@ const MatrixTree = () => {
     try {
       const response = await axios.get(apiUrl + "/uwn1", {
         params: {
-          user: address,
+          // user: address,
+          user: childAdd ? childAdd :  address,
           slot: slot,
         },
       });
 
       if (response.data && response.data.mergedRecords) {
         const OriginalData = response.data.mergedRecords.map(
-          (item) => item.userId
+          (item) => item
         );
         console.log(response.data.reenty, "rentry");
         setReEntry(response?.data?.reenty ?? "");
-        const blockData = [...OriginalData].reverse();
+        const blockData = [...OriginalData];
         console.log("Block Data:", blockData);
         setLastBlock(response.data.mergedRecords.at(-1)?.place ?? "");
         console.log("Last Block:", lastBlock);
@@ -65,12 +77,13 @@ const MatrixTree = () => {
       const getBlocks = async () => {
         const blockData = await fetchBlockData(add, slot);
         setBlocks(blockData);
+        console.log("Block Data:", blocks);
       };
 
       getBlocks();
     }
-  }, [address, add, slot]);
-  console.log(blocks, "block");
+  }, [address, add, slot,childAdd]);
+  // console.log(blocks, "block");
 
   const slots = [
     { id: 1, price: 7, name: "Community Member" },
@@ -125,7 +138,7 @@ const MatrixTree = () => {
                 </button>
               </div>
 
-              <div className="btn-group align-self-end mb-3">
+              {/* <div className="btn-group align-self-end mb-3">
                 <button
                   type=""
                   className="btn btn-primary-gradient btn-packages "
@@ -351,7 +364,7 @@ const MatrixTree = () => {
                     </li>
                   </div>
                 </ul>
-              </div>
+              </div> */}
 
               <div className="mgt-container">
                 <div className="mgt-wrapper">
@@ -359,7 +372,7 @@ const MatrixTree = () => {
                     <div className="mgt-item-parent">
                       <div className="person">
                         <div className="person-profile"></div>
-                        <p className="name">{userId ? userId : "N/A"}</p>
+                        <p className="name">{childAdd ? childUser : userId}</p>
                       </div>
                     </div>
 
@@ -367,24 +380,24 @@ const MatrixTree = () => {
                       <div className="mgt-item-child">
                         <div className="mgt-item">
                           <div className="mgt-item-parent">
-                            <div className="person">
+                            <div className="person" onClick={()=> handleClick(blocks[0]?.user, blocks[0]?.userId)}>
                               <div className="person-profile"></div>
-                              <p className="name">100%</p>
+                              <p className="name">{lastBlock >= 1 ? blocks[0]?.userId : "N/A"}</p>
                             </div>
                           </div>
 
                           <div className="mgt-item-children">
                             <div className="mgt-item-child">
-                              <div className="person">
+                              <div className="person" onClick={()=> handleClick(blocks[2]?.user, blocks[2]?.userId)}>
                                 <div className="person-profile"></div>
-                                <p className="name">50%</p>
+                                <p className="name">{lastBlock >= 3 ? blocks[2]?.userId : "N/A"}</p>
                               </div>
                             </div>
 
                             <div className="mgt-item-child">
-                              <div className="person">
+                              <div className="person" onClick={()=> handleClick(blocks[3]?.user, blocks[3]?.userId)}>
                                 <div className="person-profile"></div>
-                                <p className="name">50%</p>
+                                <p className="name">{lastBlock >= 4 ? blocks[3]?.userId : "N/A"}</p>
                               </div>
                             </div>
                           </div>
@@ -394,24 +407,24 @@ const MatrixTree = () => {
                       <div className="mgt-item-child">
                         <div className="mgt-item">
                           <div className="mgt-item-parent">
-                            <div className="person">
+                            <div className="person" onClick={()=> handleClick(blocks[1]?.user, blocks[1]?.userId)}>
                               <div className="person-profile"></div>
-                              <p className="name">100%</p>
+                              <p className="name">{lastBlock >= 2 ? blocks[1]?.userId : "N/A"}</p>
                             </div>
                           </div>
 
                           <div className="mgt-item-children">
                             <div className="mgt-item-child">
-                              <div className="person">
+                              <div className="person" onClick={()=> handleClick(blocks[4]?.user, blocks[4]?.userId)}>
                                 <div className="person-profile"></div>
-                                <p className="name">50%</p>
+                                <p className="name">{lastBlock >= 5 ? blocks[4]?.userId : "N/A"}</p>
                               </div>
                             </div>
 
                             <div className="mgt-item-child">
-                              <div className="person">
+                              <div className="person" onClick={()=> handleClick(blocks[5]?.user, blocks[5]?.userId)}>
                                 <div className="person-profile"></div>
-                                <p className="name">50%</p>
+                                <p className="name">{lastBlock == 6 ? blocks[5]?.userId : "N/A"}</p>
                               </div>
                             </div>
                           </div>

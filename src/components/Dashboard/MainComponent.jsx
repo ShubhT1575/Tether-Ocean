@@ -109,7 +109,7 @@ function MainComponent() {
                 Dashboard
               </h1>
             </div>
-            {/* {dashboardData?.referrerId && (
+            {dashboardData?.referrerId && (
               <div className="d-flex">
                 <div className="input-group mb-3">
                   <div className="input-group-prepend">
@@ -126,7 +126,7 @@ function MainComponent() {
                     className="form-control"
                     id="input-text"
                     aria-describedby="basic-addon3"
-                    value={`${baseUrl}/signUp?ref=${dashboardData?.referrerId}`}
+                    value={`${baseUrl}/SignUp?ref=${dashboardData?.userId}`}
                     readOnly
                     style={{
                       borderRadius: "0",
@@ -144,7 +144,7 @@ function MainComponent() {
                   <i className="ri-file-copy-fill"></i>
                 </button>
               </div>
-             )} */}
+             )}
           </div>
         </div>
         {/* row  start */}

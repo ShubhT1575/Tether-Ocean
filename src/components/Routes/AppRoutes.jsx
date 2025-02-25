@@ -50,8 +50,10 @@ const Layout = ({ children }) => {
     "/SignIn", 
     "/Terms",
     "/SignUp",
+    "/signUp"
   ].includes(location.pathname);
 
+  
   return (
     <>
       {!hideHeaderFooterSidebar && <Header />}

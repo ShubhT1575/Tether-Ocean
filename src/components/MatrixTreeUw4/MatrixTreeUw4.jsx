@@ -17,6 +17,18 @@ const MatrixTree = () => {
   const { dashboardData } = useSelector((state) => state.bitgold);
   const { userId } = dashboardData;
 
+  const [childAdd, setChildAdd] = useState();
+  const [childUser, setChildUser] = useState();
+  
+  const handleClick = (childAdd , childUser)=>{
+    // console.log(childAdd, "childAdd");
+    if(childAdd){
+    setChildAdd(childAdd)
+    setChildUser(childUser)
+    }
+    // console.log(childAdd, "childAdd");
+  }
+
   useEffect(() => {
     const res = new URLSearchParams(window.location.search);
     // https://usdtocean.io/api/uwn2?user=0x13eF67AF092A521370A97FCC5cc26fBB109DDEbc&slot=1
@@ -34,18 +46,19 @@ const MatrixTree = () => {
     try {
       const response = await axios.get(apiUrl + "/uwn4", {
         params: {
-          user: address,
-          slot: slot,
+          // user: address,
+          user: childAdd ? childAdd :  address,
+          // slot: slot,
         },
       });
 
       if (response.data && response.data.mergedRecords) {
         const OriginalData = response.data.mergedRecords.map(
-          (item) => item.userId
+          (item) => item
         );
         console.log(response.data.reenty, "rentry");
         setReEntry(response?.data?.reenty ?? "");
-        const blockData = [...OriginalData].reverse();
+        const blockData = [...OriginalData];
         console.log("Block Data:", blockData);
         setLastBlock(response.data.mergedRecords.at(-1)?.place ?? "");
         console.log("Last Block:", lastBlock);
@@ -71,7 +84,7 @@ const MatrixTree = () => {
 
       getBlocks();
     }
-  }, [address, add, slot]);
+  }, [address, add, slot, childAdd]);
   console.log(blocks, "block");
 
 
@@ -129,7 +142,7 @@ const MatrixTree = () => {
                 </button>
               </div>
 
-              <div className="btn-group align-self-end mb-3">
+              {/* <div className="btn-group align-self-end mb-3">
                 <button
                   type=""
                   className="btn btn-primary-gradient btn-packages "
@@ -355,7 +368,7 @@ const MatrixTree = () => {
                     </li>
                   </div>
                 </ul>
-              </div>
+              </div> */}
 
               <div className="mgt-container">
                 <div className="mgt-wrapper">
@@ -363,636 +376,48 @@ const MatrixTree = () => {
                     <div className="mgt-item-parent">
                       <div className="person">
                         <div className="person-profile"></div>
-                        <p className="name">{userId ? userId : "N/A"}<br/><strong className="text-primary">$12</strong></p>
+                        <p className="name">{childAdd ? childUser : userId}</p>
                       </div>
                     </div>
 
                     <div className="mgt-item-children">
                       <div className="mgt-item-child">
                         <div className="mgt-item">
-                          <div className="mgt-item-parent">
-                            <div className="person">
+                          {/* <div className="mgt-item-parent"> */}
+                            <div className="person" onClick={()=> handleClick(blocks[0]?.user, blocks[0]?.userId)}>
                               <div className="person-profile"></div>
-                              <p className="name">20%<br/><strong className="text-primary">$12</strong></p>
+                              <p className="name">{lastBlock >= 1 ? blocks[0]?.userId : "N/A"}</p>
                             </div>
-                          </div>
+                          {/* </div> */}
 
-                          <div className="mgt-item-children">
-                            <div className="mgt-item-child">
-                              <div className="mgt-item">
-                                <div className="mgt-item-parent">
-                                  <div className="person">
-                                    <div className="person-profile"></div>
-                                    <p className="name">30%</p>
-                                  </div>
-                                </div>
-
-                                <div className="mgt-item-children">
-                                  <div className="mgt-item-child">
-                                    <div className="mgt-item">
-                                      <div className="mgt-item-parent">
-                                        <div className="person">
-                                          <div className="person-profile"></div>
-                                          <p className="name">20%</p>
-                                        </div>
-                                      </div>
-
-                                      {/* <div className="mgt-item-children">
-                                        <div className="mgt-item-child">
-                                          <div className="mgt-item">
-                                            <div className="mgt-item-parent">
-                                              <div className="person">
-                                                <div className="person-profile"></div>
-                                                <p className="name">30%</p>
-                                              </div>
-                                            </div>
-
-                                            <div className="mgt-item-children">
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                        <div className="mgt-item-child">
-                                          <div className="mgt-item">
-                                            <div className="mgt-item-parent">
-                                              <div className="person">
-                                                <div className="person-profile"></div>
-                                                <p className="name">30%</p>
-                                              </div>
-                                            </div>
-
-                                            <div className="mgt-item-children">
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div> */}
-                                    </div>
-                                  </div>
-
-                                  <div className="mgt-item-child">
-                                    <div className="mgt-item">
-                                      <div className="mgt-item-parent">
-                                        <div className="person">
-                                          <div className="person-profile"></div>
-                                          <p className="name">20%</p>
-                                        </div>
-                                      </div>
-
-                                      {/* <div className="mgt-item-children">
-                                        <div className="mgt-item-child">
-                                          <div className="mgt-item">
-                                            <div className="mgt-item-parent">
-                                              <div className="person">
-                                                <div className="person-profile"></div>
-                                                <p className="name">30%</p>
-                                              </div>
-                                            </div>
-
-                                            <div className="mgt-item-children">
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                        <div className="mgt-item-child">
-                                          <div className="mgt-item">
-                                            <div className="mgt-item-parent">
-                                              <div className="person">
-                                                <div className="person-profile"></div>
-                                                <p className="name">30%</p>
-                                              </div>
-                                            </div>
-
-                                            <div className="mgt-item-children">
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div> */}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="mgt-item-child">
-                              <div className="mgt-item">
-                                <div className="mgt-item-parent">
-                                  <div className="person">
-                                    <div className="person-profile"></div>
-                                    <p className="name">30%</p>
-                                  </div>
-                                </div>
-
-                                <div className="mgt-item-children">
-                                  <div className="mgt-item-child">
-                                    <div className="mgt-item">
-                                      <div className="mgt-item-parent">
-                                        <div className="person">
-                                          <div className="person-profile"></div>
-                                          <p className="name">20%</p>
-                                        </div>
-                                      </div>
-
-                                      {/* <div className="mgt-item-children">
-                                        <div className="mgt-item-child">
-                                          <div className="mgt-item">
-                                            <div className="mgt-item-parent">
-                                              <div className="person">
-                                                <div className="person-profile"></div>
-                                                <p className="name">30%</p>
-                                              </div>
-                                            </div>
-
-                                            <div className="mgt-item-children">
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                        <div className="mgt-item-child">
-                                          <div className="mgt-item">
-                                            <div className="mgt-item-parent">
-                                              <div className="person">
-                                                <div className="person-profile"></div>
-                                                <p className="name">30%</p>
-                                              </div>
-                                            </div>
-
-                                            <div className="mgt-item-children">
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div> */}
-                                    </div>
-                                  </div>
-
-                                  <div className="mgt-item-child">
-                                    <div className="mgt-item">
-                                      <div className="mgt-item-parent">
-                                        <div className="person">
-                                          <div className="person-profile"></div>
-                                          <p className="name">20%</p>
-                                        </div>
-                                      </div>
-
-                                      {/* <div className="mgt-item-children">
-                                        <div className="mgt-item-child">
-                                          <div className="mgt-item">
-                                            <div className="mgt-item-parent">
-                                              <div className="person">
-                                                <div className="person-profile"></div>
-                                                <p className="name">30%</p>
-                                              </div>
-                                            </div>
-
-                                            <div className="mgt-item-children">
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                        <div className="mgt-item-child">
-                                          <div className="mgt-item">
-                                            <div className="mgt-item-parent">
-                                              <div className="person">
-                                                <div className="person-profile"></div>
-                                                <p className="name">30%</p>
-                                              </div>
-                                            </div>
-
-                                            <div className="mgt-item-children">
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div> */}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          
                         </div>
                       </div>
 
                       <div className="mgt-item-child">
                         <div className="mgt-item">
-                          <div className="mgt-item-parent">
-                            <div className="person">
+                          {/* <div className="mgt-item-parent"> */}
+                            <div className="person" onClick={()=> handleClick(blocks[1]?.user, blocks[1]?.userId)}>
                               <div className="person-profile"></div>
-                              <p className="name">20%</p>
+                              <p className="name">{lastBlock == 2 ? blocks[1]?.userId : "N/A"}</p>
                             </div>
-                          </div>
+                          {/* </div> */}
 
-                          <div className="mgt-item-children">
-                            <div className="mgt-item-child">
-                              <div className="mgt-item">
-                                <div className="mgt-item-parent">
-                                  <div className="person">
-                                    <div className="person-profile"></div>
-                                    <p className="name">30%</p>
-                                  </div>
-                                </div>
-
-                                <div className="mgt-item-children">
-                                  <div className="mgt-item-child">
-                                    <div className="mgt-item">
-                                      <div className="mgt-item-parent">
-                                        <div className="person">
-                                          <div className="person-profile"></div>
-                                          <p className="name">20%</p>
-                                        </div>
-                                      </div>
-
-                                      {/* <div className="mgt-item-children">
-                                        <div className="mgt-item-child">
-                                          <div className="mgt-item">
-                                            <div className="mgt-item-parent">
-                                              <div className="person">
-                                                <div className="person-profile"></div>
-                                                <p className="name">30%</p>
-                                              </div>
-                                            </div>
-
-                                            <div className="mgt-item-children">
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                        <div className="mgt-item-child">
-                                          <div className="mgt-item">
-                                            <div className="mgt-item-parent">
-                                              <div className="person">
-                                                <div className="person-profile"></div>
-                                                <p className="name">30%</p>
-                                              </div>
-                                            </div>
-
-                                            <div className="mgt-item-children">
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div> */}
-                                    </div>
-                                  </div>
-
-                                  <div className="mgt-item-child">
-                                    <div className="mgt-item">
-                                      <div className="mgt-item-parent">
-                                        <div className="person">
-                                          <div className="person-profile"></div>
-                                          <p className="name">20%</p>
-                                        </div>
-                                      </div>
-
-                                      {/* <div className="mgt-item-children">
-                                        <div className="mgt-item-child">
-                                          <div className="mgt-item">
-                                            <div className="mgt-item-parent">
-                                              <div className="person">
-                                                <div className="person-profile"></div>
-                                                <p className="name">30%</p>
-                                              </div>
-                                            </div>
-
-                                            <div className="mgt-item-children">
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                        <div className="mgt-item-child">
-                                          <div className="mgt-item">
-                                            <div className="mgt-item-parent">
-                                              <div className="person">
-                                                <div className="person-profile"></div>
-                                                <p className="name">30%</p>
-                                              </div>
-                                            </div>
-
-                                            <div className="mgt-item-children">
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div> */}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="mgt-item-child">
-                              <div className="mgt-item">
-                                <div className="mgt-item-parent">
-                                  <div className="person">
-                                    <div className="person-profile"></div>
-                                    <p className="name">30%</p>
-                                  </div>
-                                </div>
-
-                                <div className="mgt-item-children">
-                                  <div className="mgt-item-child">
-                                    <div className="mgt-item">
-                                      <div className="mgt-item-parent">
-                                        <div className="person">
-                                          <div className="person-profile"></div>
-                                          <p className="name">20%</p>
-                                        </div>
-                                      </div>
-
-                                      {/* <div className="mgt-item-children">
-                                        <div className="mgt-item-child">
-                                          <div className="mgt-item">
-                                            <div className="mgt-item-parent">
-                                              <div className="person">
-                                                <div className="person-profile"></div>
-                                                <p className="name">30%</p>
-                                              </div>
-                                            </div>
-
-                                            <div className="mgt-item-children">
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                        <div className="mgt-item-child">
-                                          <div className="mgt-item">
-                                            <div className="mgt-item-parent">
-                                              <div className="person">
-                                                <div className="person-profile"></div>
-                                                <p className="name">30%</p>
-                                              </div>
-                                            </div>
-
-                                            <div className="mgt-item-children">
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div> */}
-                                    </div>
-                                  </div>
-
-                                  <div className="mgt-item-child">
-                                    <div className="mgt-item">
-                                      <div className="mgt-item-parent">
-                                        <div className="person">
-                                          <div className="person-profile"></div>
-                                          <p className="name">20%</p>
-                                        </div>
-                                      </div>
-
-                                      {/* <div className="mgt-item-children">
-                                        <div className="mgt-item-child">
-                                          <div className="mgt-item">
-                                            <div className="mgt-item-parent">
-                                              <div className="person">
-                                                <div className="person-profile"></div>
-                                                <p className="name">30%</p>
-                                              </div>
-                                            </div>
-
-                                            <div className="mgt-item-children">
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                        <div className="mgt-item-child">
-                                          <div className="mgt-item">
-                                            <div className="mgt-item-parent">
-                                              <div className="person">
-                                                <div className="person-profile"></div>
-                                                <p className="name">30%</p>
-                                              </div>
-                                            </div>
-
-                                            <div className="mgt-item-children">
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-
-                                              <div className="mgt-item-child">
-                                                <div className="person">
-                                                  <div className="person-profile"></div>
-                                                  <p className="name">50%</p>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div> */}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                        
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="horizontal">
+              {/* <div class="horizontal">
                 <div class="verticals twelve text-center">
                   <h1 style={{ color: "#676767" }}>
                     Upto 16 Levels <TbBinaryTree2  />
                   </h1>
                 </div>
-              </div>
-              <div className="col-sm-12 col-lg-12">
+              </div> */}
+              {/* <div className="col-sm-12 col-lg-12">
                     <div>
                       <div className="card custom-card school-card" style={{margin: "0"}}>
                         <div
@@ -1024,7 +449,7 @@ const MatrixTree = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
             </section>
           </div>
 

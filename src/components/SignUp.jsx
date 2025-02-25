@@ -148,7 +148,7 @@ function SignUp() {
         setIsLoading(false);
         return toast.error("Enter Package Value");
       }
-      // if (amt >= 60) {
+      // if (amt >= 7) {
       //   setIsLoading(false);
       //   toast.error("Please Enter an Register Amount Greater Than 60");
       //   return;
@@ -160,19 +160,20 @@ function SignUp() {
         setIsLoading(false);
         return;
       }
-      // let getRefAddress;
-      // if (refAddress) {
-      //   getRefAddress = await getAddressbyRefrralId(refAddress);
-      //   if (getRefAddress?.data?.status != 200) {
-      //     setIsLoading(false);
-      //     toast.error(getRefAddress?.data?.message);
-      //     return;
-      //   }
-      // }
+      let getRefAddress;
+      if (refAddress) {
+        getRefAddress = await getAddressbyRefrralId(refAddress);
+        console.log(getRefAddress?.data, "getRefAddress");
+        if (getRefAddress?.status != 200) {
+          setIsLoading(false);
+          toast.error("hello");
+          return;
+        }
+      }
 
       const ownerAddress = await getOwner();
       console.log({ownerAddress})
-      const refAddressSet = !refAddress ? ownerAddress : refAddress;
+      const refAddressSet = !refAddress ? ownerAddress : getRefAddress?.data;
 
       console.log(refAddressSet, "ref::::");
 
@@ -198,12 +199,12 @@ function SignUp() {
 
       const walletBalance = parseFloat(balance.formatted);
 
-      // if (walletBalance < amt) {
-      //   console.log(walletBalance, amt);
-      //   setIsLoading(false);
-      //   toast.error("Insufficient Balance");
-      //   return;
-      // }
+      if (walletBalance < amt) {
+        console.log(walletBalance, amt);
+        setIsLoading(false);
+        toast.error("Insufficient Balance");
+        return;
+      }
 
       // if (!isChecked) {
       //   setIsLoading(false);
@@ -213,14 +214,14 @@ function SignUp() {
       // }
       // console.log("a a");
 
-      // const allowance = await checkAllowance(address, Taddress);
-      // console.log("a a4");
-      let appRes = true;
-      // if (amt > allowance / Number("1e" + tokenDecimals)) {
-      //   appRes = await appToken(amt, Taddress, tokenDecimals);
-      // } else {
-      //   appRes = true;
-      // }
+      const allowance = await checkAllowance(address, Taddress);
+      console.log("a a4");
+      let appRes
+      if (amt > allowance / Number("1e" + tokenDecimals)) {
+        appRes = await appToken(amt, Taddress, tokenDecimals);
+      } else {
+        appRes = true;
+      }
 
       if (appRes) {
         const buy = buyPackage(refAddressSet, amt, tokenDecimals);
