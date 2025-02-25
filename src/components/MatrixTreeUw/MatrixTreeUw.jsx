@@ -40,9 +40,21 @@ const MatrixTree = () => {
   const { dashboardData } = useSelector((state) => state.bitgold);
   const { userId } = dashboardData;
 
+    const [childAdd, setChildAdd] = useState();
+    const [childUser, setChildUser] = useState();
+
+  const handleClick = (childAdd , childUser)=>{
+    // console.log(childAdd, "childAdd");
+    if(childAdd){
+    setChildAdd(childAdd)
+    setChildUser(childUser)
+    }
+    // console.log(childAdd, "childAdd");
+  }
+
   useEffect(() => {
     const res = new URLSearchParams(window.location.search);
-    // https://usdtocean.io/api/uw?user=0x13eF67AF092A521370A97FCC5cc26fBB109DDEbc&slot=1
+    // https://usdtocean.io/api/uwn2?user=0x13eF67AF092A521370A97FCC5cc26fBB109DDEbc&slot=1
     if (res.has("accessAddress")) {
       const ref = res.get("accessAddress");
       console.log(ref, "redddddfffff");
@@ -51,20 +63,20 @@ const MatrixTree = () => {
   }, [window.location.search]);
 
   const add = address ? address : accessAdress;
-  const [lastBlock,setLastBlock] = useState("")
+  const [lastBlock, setLastBlock] = useState("");
 
-  const fetchBlockData = async (address,slot) => {
+  const fetchBlockData = async (address, slot) => {
     try {
       const response = await axios.get(apiUrl + "/uw", {
         params: {
           // user: address,
-          user: "0x71dFd92C06a4d3710C87e1B1e6898D452C9c0542",
+          user: childAdd ? childAdd :  address,
           slot: slot,
         },
       });
 
       if (response.data && response.data.matrixstruct) {
-        const OriginalData = response.data.matrixstruct.map((item) => item.userId);
+        const OriginalData = response.data.matrixstruct.map((item) => item);
         console.log(response.data.reenty,"rentry")
         setReEntry(response?.data?.reenty??"")
         const blockData = [...OriginalData].reverse();
@@ -396,22 +408,22 @@ const MatrixTree = () => {
                           <div className="mgt-item-parent">
                             <div className="person">
                               <div className="person-profile"></div>
-                              <p className="name">{userId? userId : "N/A"}</p>
+                              <p className="name">{childAdd ? childUser : userId}</p>
                             </div>
                           </div>
 
                           <div className="mgt-item-children">
                             <div className="mgt-item-child">
-                              <div className="person">
+                              <div className="person" onClick={()=> handleClick(blocks[0]?.user, blocks[0]?.userId)}>
                                 <div className="person-profile"></div>
-                                <p className="name">{lastBlock != 3 ? blocks?.[0] ?? "N/A" : "N/A"}</p>
+                                <p className="name">{lastBlock != 3 ? blocks[0]?.userId ?? "N/A" : "N/A"}</p>
                               </div>
                             </div>
 
                             <div className="mgt-item-child">
-                              <div className="person">
+                              <div className="person" onClick={()=> handleClick(blocks[1]?.user, blocks[1]?.userId)}>
                                 <div className="person-profile"></div>
-                                <p className="name">{lastBlock == 1 || lastBlock == 3 ? "N/A" :   blocks?.[1] ?? "N/A"}</p>
+                                <p className="name">{lastBlock == 1 || lastBlock == 3 ? "N/A" :   blocks[1]?.userId ?? "N/A"}</p>
                               </div>
                             </div>
 

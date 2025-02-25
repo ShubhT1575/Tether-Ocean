@@ -64,6 +64,7 @@ export const getAddressbyRefrralId = async (referralId) => {
         ref_id: referralId,
       },
     });
+    console.log(response, "response");
     return response;
   } catch (error) {
     console.error("Error fetching Referral ID:", error.message);
