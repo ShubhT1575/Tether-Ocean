@@ -141,6 +141,7 @@ function DashboardRow2() {
         params: {
           userId: address,
           matrix: 1,
+          slot: 1
         },
       });
       if (response?.status === 200) {
@@ -1347,11 +1348,11 @@ function DashboardRow2() {
                 <tbody>
                   {paginatedLevels?.map((rep, index) => (
                     <tr key={index}>
-                      <td>{`${rep.user.slice(0, 6)}...${rep.user.slice(
+                      <td>{`${rep.sender.slice(0, 6)}...${rep.sender.slice(
                         -4
                       )}`}</td>
                       <td style={{ color: "rgb(0, 119, 181)" }}>
-                        {rep.matrix}
+                        {rep.matrixId}
                       </td>
                       {/* <td>{rep.now_level}</td> */}
                       <td>{rep.slotId}</td>
@@ -1398,8 +1399,8 @@ function DashboardRow2() {
                 <li
                   className={`page-item ${matrixIncome?.length === 0? "disabled":""}`}
                 >
-                  <Link className="page-link text-primary bg-transparent" to="/LevelIncome">
-                    Navigate to Matrix Income for full table <i className="fa-solid fa-arrow-trend-up"></i>
+                  <Link className="page-link text-primary bg-transparent" to="/MatrixTreeUw">
+                    Navigate to Matrix for full info <i className="fa-solid fa-arrow-trend-up"></i>
                   </Link>
                 </li>
               </ul>

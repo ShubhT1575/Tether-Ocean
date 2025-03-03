@@ -44,15 +44,15 @@ function Header() {
     );
   }, [dispatch, chainId, add, isConnected, isDisconnected, accessAdress]);
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (!add) {
-        navigate("/SignIn");
-      }
-    }, 2000);
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     if (!add) {
+  //       navigate("/SignIn");
+  //     }
+  //   }, 2000);
   
-    return () => clearTimeout(timeout); 
-  }, [add, navigate]);
+  //   return () => clearTimeout(timeout); 
+  // }, [add, navigate]);
   
 
   useEffect(() => {

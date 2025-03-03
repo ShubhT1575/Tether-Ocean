@@ -208,13 +208,13 @@ function Sidebar() {
             </li> */}
 
             {/* MatrixIncome */}
-            <li className="slide has-sub">
+            {/* <li className="slide has-sub">
               <Link
                 to="/LevelIncome"
                 className="side-menu__item"
                 onClick={closeSidebar}
               >
-                {/* <FaSackDollar className="side-menu__icon" /> */}
+                <FaSackDollar className="side-menu__icon" />
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -237,7 +237,7 @@ function Sidebar() {
                 </svg>
                 <span className="side-menu__label">Matrix Income</span>
               </Link>
-            </li>
+            </li> */}
 
 
 

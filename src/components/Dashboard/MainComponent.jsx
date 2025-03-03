@@ -110,7 +110,7 @@ function MainComponent() {
               </h1>
             </div>
             {dashboardData?.referrerId && (
-              <div className="d-flex">
+              <div className="d-flex" style={{ marginTop: "10px" }}>
                 <div className="input-group mb-3">
                   <div className="input-group-prepend">
                     <span
