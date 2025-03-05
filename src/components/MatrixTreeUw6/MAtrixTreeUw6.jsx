@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../style/matrix.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { apiUrl } from "../Config";
+import { useAccount } from "wagmi";
 
 const MatrixTree = () => {
+  const {address} = useAccount();
+
+  const getSlotName = (slotId) => {
+    const slotNames = [
+      "Saphire", // 1
+      "Ruby",     // 2
+      "Topaz",  // 3
+      "Diamond",  // 4
+      "Green Diamond",    // 5
+      "Blue Diamond",    // 6
+      "Black Diamond",     // 7
+      "Crown Diamond"  // 8
+    ];
+    
+    return slotNames[slotId - 1] || "Unknown";
+  };
+
   const diamondSlot = [
     {
       id: 1,
@@ -62,6 +82,28 @@ const MatrixTree = () => {
     },
   ];
 
+  const [boxData,setBoxData] = useState([])
+
+  const fetchUn6 = async (address)=>{
+    const res = await axios.get(apiUrl + "/uwn7" ,{
+      params:{
+        user: address,
+      }
+    })
+    if(res?.status == 200){
+      console.log(res?.data,"un6")
+      setBoxData(res?.data);
+    }
+  }
+
+  useEffect(()=>{
+    if(address){
+      fetchUn6(address)
+    }
+  },[address])
+
+ 
+
   return (
     <>
       <div className="main-content app-content">
@@ -87,7 +129,7 @@ const MatrixTree = () => {
           </div>
           <div className="verticals twelve">
             <section className="management-tree card custom-card school-card">
-              <div className="btn-group align-self-end mb-3">
+              {/* <div className="btn-group align-self-end mb-3">
                 <button
                   type=""
                   className="btn btn-primary-gradient btn-packages "
@@ -297,18 +339,17 @@ const MatrixTree = () => {
                     </li>
                   </div>
                 </ul>
-              </div>
+              </div> */}
 
-              {/*  <!-- From Uiverse.io by adamgiebl -->  */}
               <div className="card-parent-uw6">
-                {diamondSlot?.map((item) => {
+                {boxData?.map((item) => {
                   return (
-                    <div className="card-uw6" id={item.id}>
+                    <div className={`card-uw6 ${item.isRankAchieved === false ? "disabled-card-uw6":""}`} id={item.id}>
                       <div className="card__content">
-                        <div className="head-uw6">{item.name}</div>
-                        <div className="main-uw6">{item.Direct}</div>
+                        <div className="head-uw6">{item.slot}</div>
+                        <div className="main-uw6">{getSlotName(item.slot)}</div>
                         <p className="uw6-p">{item.Team}</p>
-                        <div className="foot-uw6">{item.Distribution}</div>
+                        <div className="foot-uw6">{item.totalAmount / 1e18 + "$"}</div>
                       </div>
                     </div>
                   );
