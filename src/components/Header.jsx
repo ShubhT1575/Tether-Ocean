@@ -62,7 +62,7 @@ function Header() {
         console.log(res, "res");
         if (res?.status == 200) {
           console.log(res?.data?.userDetails, "ghfsdatgcgt");
-          dispatch(setDashboardData(res?.data?.userDetails));
+          dispatch(setDashboardData(res?.data));
         } else {
           dispatch(setDashboardData({}));
         }

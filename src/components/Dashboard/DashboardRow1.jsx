@@ -50,7 +50,7 @@ function DashboardRow1() {
   // const address = walletAddress;
   const { address } = useAccount();
   console.log(dashboardData, "dataaa");
-  const { userId, referrerId, rank, createdAt } = dashboardData;
+  const { userDetails,directteam,allteam,directincome,levelIncome,totalincome,todayBonus } = dashboardData;
   // const [dashboard, setDashboard] = useState();
   // const [rewardData, setRewardData] = useState();
   // const [isDivEnabled, setIsDivEnabled] = useState(false);
@@ -282,7 +282,7 @@ function DashboardRow1() {
                         Monthly Activated
                       </div> */}
                     </div>
-                    <h6 className="mb-0 fw-semibold">{userId || "No User"}</h6>
+                    <h6 className="mb-0 fw-semibold">{userDetails?.userId || "No User"}</h6>
                   </div>
                   <div>
                     <span className="text-primary">
@@ -300,7 +300,7 @@ function DashboardRow1() {
                   <div>
                     <span className="d-block mb-1">Referral Id</span>
                     <h6 className="mb-0 fw-semibold">
-                      {referrerId || "No Sponsor"}
+                      {userDetails?.referrerId || "No Sponsor"}
                     </h6>
                   </div>
                   <div>
@@ -320,7 +320,7 @@ function DashboardRow1() {
                     <span className="d-block mb-1">Rank</span>
                     <h6 className="mb-0 fw-semibold">
                       {/* {dashboard && Number(dashboard[3])} */}
-                      {rank || "0"}
+                      {userDetails?.rank || "0"}
                     </h6>
                   </div>
                   <div>
@@ -339,7 +339,7 @@ function DashboardRow1() {
                   <div>
                     <span className="d-block mb-1">ID Date</span>
                     <h6 className="mb-0 fw-semibold">
-                      {new Date(createdAt).toLocaleDateString()}
+                      {new Date(userDetails?.createdAt).toLocaleDateString()}
                     </h6>
                   </div>
                   <div>
@@ -351,15 +351,14 @@ function DashboardRow1() {
               </div>
             </div>
           </div>
-              {/* <div className="col-sm-6 col-lg-6">
+              <div className="col-sm-6 col-lg-6">
                 <div className="">
                   <div className="card custom-card school-card">
                     <div className="card-body d-flex gap-2 justify-content-between">
                       <div>
                         <span className="d-block mb-1">Referral Reward</span>
                         <h6 className="mb-0 fw-semibold">
-                          ${" "}
-                          0
+                          {directteam || 0}
                         </h6>
                       </div>
                       <div>
@@ -379,15 +378,15 @@ function DashboardRow1() {
                         <span className="d-block mb-1">Rank Reward</span>
                         <div className="d-flex gap-3">
                           <h6 className="mb-0 fw-semibold">
-                            0
+                            {allteam || 0}
                           </h6>
-                          <span
+                          {/* <span
                             className="text-primary badge bg-success-transparent rounded-pill d-flex align-items-center fs-11 me-0 ms-2 mb-0 px-2"
                             style={{ cursor: "pointer" }}
-                            onClick={ClaimRankReward}
+                            // onClick={ClaimRankReward}
                           >
                             Claim
-                          </span>
+                          </span> */}
                         </div>
                       </div>
                       <div>
@@ -407,16 +406,15 @@ function DashboardRow1() {
                         <span className="d-block mb-1"> Stake Reward</span>
                         <div className="d-flex gap-3">
                           <h6 className="mb-0 fw-semibold">
-                            ${" "}
-                            0
+                            {directincome || 0}
                           </h6>
-                          <span
+                          {/* <span
                             className="text-warning badge bg-success-transparent rounded-pill d-flex align-items-center fs-11 me-0 ms-2 mb-0 px-2"
                             style={{ cursor: "pointer" }}
-                            onClick={UserClaimStakeReward}
+                            // onClick={UserClaimStakeReward}
                           >
                             Claim
-                          </span>
+                          </span> */}
                           <div>
                             <span
                               className="text-primary1"
@@ -451,19 +449,18 @@ function DashboardRow1() {
                       <div>
                         <span className="d-block mb-1"> Login Reward</span>
                         <div className="d-flex gap-1">
-                          {" "}
                           <h6 className="mb-0 fw-semibold">
-                            0
+                            {levelIncome || 0}
                           </h6>
-                          {isDivEnabled && (
+                          {/* {isDivEnabled && (
                             <span
                               className="text-info badge bg-success-transparent rounded-pill d-flex align-items-center fs-11 me-0 ms-2 mb-0 px-2"
                               style={{ cursor: "pointer" }}
-                              onClick={getReawrd}
+                              // onClick={getReawrd}
                             >
                               Claim
                             </span>
-                          )}
+                          )} */}
                         </div>
                       </div>
                       <div>
@@ -474,7 +471,7 @@ function DashboardRow1() {
                     </div>
                   </div>
                 </div>
-              </div> */}
+              </div>
           {/* <div className="col-sm-6 col-lg-6">
             <div
               className="modal fade"
@@ -567,7 +564,7 @@ function DashboardRow1() {
               </div>
             </div>
           </div> */}
-          {/* <div className="col-sm-6 col-lg-6">
+          <div className="col-sm-6 col-lg-6">
             <div>
               <div className="card custom-card school-card">
                 <div className="card-body d-flex gap-2 justify-content-between">
@@ -575,11 +572,11 @@ function DashboardRow1() {
                     <span className="d-block mb-1">Fund Wallet</span>
                     <div className="">
                       <h6 className="mb-0 fw-semibold">
-                        ${" "}
-                        {(dashboard &&
+                        {/* {(dashboard &&
                           Number(dashboard[11].fundingWallet) /
                             ("1e" + tokenDecimals)) ||
-                          0.0}
+                          0.0} */}
+                          {totalincome || 0}
                       </h6>
                     </div>
                   </div>
@@ -591,8 +588,8 @@ function DashboardRow1() {
                 </div>
               </div>
             </div>
-          </div> */}
-          {/* <div className="col-sm-6 col-lg-6">
+          </div>
+          <div className="col-sm-6 col-lg-6">
             <div className="">
               <div className="card custom-card school-card">
                 <div className="card-body d-flex gap-2 justify-content-between">
@@ -601,7 +598,7 @@ function DashboardRow1() {
                     <div className="">
                       {" "}
                       <h6 className="mb-0 fw-semibold">
-                        ${" "}0
+                        {todayBonus || 0}
                       </h6>
                     </div>
                   </div>
@@ -614,7 +611,7 @@ function DashboardRow1() {
               </div>
             </div>
           </div>
-          <div className="col-sm-6 col-lg-6">
+          {/* <div className="col-sm-6 col-lg-6">
             <div>
               <div className="card custom-card school-card">
                 <div className="card-body d-flex gap-2 justify-content-between">
@@ -682,11 +679,11 @@ function DashboardRow1() {
         </div>
 
         <div className="col-sm-12 col-md-12 col-lg-4">
-          {/* <div
+          <div
             className="card custom-card wrapper bg-crypto-balance"
             style={{ marginBottom: "O", height: "239px" }}
           >
-            <div className="card-body box" style={{ height: "230px" }}>
+            <div className="card-body box" style={{}}>
               <div className="d-flex gap-2 align-items-start justify-content-between h-100">
                 <div className="">
                   <span className="mb-1 d-block fs-6 fw-bold">
@@ -701,10 +698,10 @@ function DashboardRow1() {
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
           <div
             className="card custom-card overflow-hidden earnings-card card bg-crypto-balance bg-success shadow-sm"
-            style={{ marginBottom: "O", height: "188px" }}
+            style={{ marginBottom: "O",height: "242px"}}
           >
             <div className="card-body p-0 text-fixed-white">
               <div className="p-3 position-absolute total-earnings-content w-100">

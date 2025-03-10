@@ -13,12 +13,12 @@ function FortuneHead() {
               <a href="#"> Page </a>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
-            Fund Wallet Reward
+            Level Team
             </li>
           </ol>
         </nav>
         <h1 className="page-title fw-medium fs-18 mb-0 text-light">
-        Fund Wallet Reward
+        Level Team
         </h1>
       </div>
     </div>

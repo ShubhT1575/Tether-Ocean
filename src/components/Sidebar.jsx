@@ -241,28 +241,28 @@ function Sidebar() {
 
 
 
-            {/* <li className="slide has-sub">
+            <li className="slide has-sub">
               <Link
                 to="/CoreIncome"
                 className="side-menu__item"
                 onClick={closeSidebar}
               >
                 <GiProfit className="side-menu__icon" />
-                <span className="side-menu__label">Daily Login Reward</span>
+                <span className="side-menu__label">Direct Team</span>
               </Link>
-            </li> */}
+            </li>
 
 
-            {/* <li className="slide has-sub">
+            <li className="slide has-sub">
               <Link
                 to="/FortuneIncome"
                 className="side-menu__item"
                 onClick={closeSidebar}
               >
                 <RiWallet3Line className="side-menu__icon" />
-                <span className="side-menu__label">Fund Wallet Reward</span>
+                <span className="side-menu__label">Level Team</span>
               </Link>
-            </li> */}
+            </li>
 
 
             {/* <li className="slide has-sub">

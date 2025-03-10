@@ -77,9 +77,9 @@ const AppRoutes = () => {
           {/* <Route path="/IncomeGraph" element={<IncomeMain />} />  */}
           {/* <Route path="/Stake" element={<StakeMain />} /> */}
           {/* <Route path="/Form" element={<FormMAin />} /> */}
-          {/* <Route path="/CoreIncome" element={<CoreMain />} /> */}
+          <Route path="/CoreIncome" element={<CoreMain />} />
           {/* <Route path="/GlobalIncome" element={<GlobalMain />} /> */}
-          {/* <Route path="/FortuneIncome" element={<FortuneMain />} /> */}
+          <Route path="/FortuneIncome" element={<FortuneMain />} />
           {/* <Route path="/Ranking" element={<RankingMain />} /> */}
           {/* <Route path="/Profile" element={<ProfileMain />} /> */}
           {/* <Route path="/Support" element={<Support />} /> */}

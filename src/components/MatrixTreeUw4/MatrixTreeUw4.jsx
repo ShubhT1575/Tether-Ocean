@@ -117,10 +117,10 @@ const MatrixTree = () => {
   
     const totalPages = Math.ceil(matrixIncome.length / itemsPerPage);
   
-    const paginatedLevels = matrixIncome.slice(
-      (currentPage - 1) * itemsPerPage,
-      currentPage * itemsPerPage
-    );
+    // const paginatedLevels = matrixIncome.slice(
+    //   (currentPage - 1) * itemsPerPage,
+    //   currentPage * itemsPerPage
+    // );
   
     // Handle previous page
     const handlePreviousPage = () => {
@@ -132,20 +132,21 @@ const MatrixTree = () => {
       if (currentPage < totalPages) setCurrentPage(currentPage + 1);
     };
   
+    // 0x14a10af09768Bc2b02d067D9a77AAC072E84812A
   
     const getMatrixIncome = async () => {
       try {
-        const response = await axios.get(apiUrl + "/matrixincome", {
+        const response = await axios.get(apiUrl + "/getPoolIncomeSummary", {
           params: {
-            userId: address,
-            matrix: 5,
-            slot: selectedSlot
+            user: address,
+            // matrix: 5,
+            slotid: selectedSlot
           },
         });
         if (response?.status === 200) {
         console.log(response.data.user_income, "repp")
   
-          setMatrixIncome(response?.data?.user_income || [])
+          setMatrixIncome(response?.data?.data || [])
           console.log(matrixIncome,"Matrix")
           // setTotalPages(response?.data?.totalPages);
         } else {
@@ -469,7 +470,7 @@ const MatrixTree = () => {
                   </h1>
                 </div>
               </div> */}
-              <div className="col-sm-12 col-lg-12">
+              {/* <div className="col-sm-12 col-lg-12">
                     <div>
                       <div className="card custom-card school-card" style={{margin: "0"}}>
                         <div
@@ -501,13 +502,13 @@ const MatrixTree = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
             </section>
             <div className="row">
               <div className="col-xl-12">
                 <div className="card custom-card overflow-hidden">
                   <div className="card-header justify-content-between">
-                    <div className="card-title">Matrix Income Data</div>
+                    <div className="card-title">Level Income (Uwn4)</div>
                   </div>
 
                   <div className="card-body active-tab">
@@ -515,27 +516,23 @@ const MatrixTree = () => {
                       <table className="table table-bordered text-nowrap mb-0">
                         <thead>
                           <tr>
-                            <th scope="col">Referrer</th>
-                            <th scope="col">Matrix</th>
+                            <th scope="col">Level</th>
+                            {/* <th scope="col">Matrix</th> */}
                             {/* <th scope="col">Sender</th> */}
-                            <th scope="col">Slot</th>
-                            <th scope="col">Amount</th>
+                            {/* <th scope="col">Slot</th> */}
+                            <th scope="col">Income</th>
                             {/* <th scope="col">Level</th>
                     <th scope="col">Total Reward</th>
                     <th scope="col">Status</th> */}
                           </tr>
                         </thead>
                         <tbody>
-                          {paginatedLevels?.map((item, index) => {
+                          {matrixIncome?.map((item, index) => {
                     return (
                       <tr key={index}>
-                        <td className="text-info">{`${item.sender.slice(0, 7)}.......${item.sender.slice(-5)}`}
-                        </td>
-                        <td className="text-warning">{item?.matrixId}</td>
-                        <td className="text-light">
-                            {item.slotId}
-                        </td>
-                        <td className="text-danger">$ {item.amount/1e18}</td>
+                      
+                        <td className="text-warning">{item?.level}</td>
+                        <td className={`${item?.income !== 0 ? "text-danger":"text-light"}`}>$ {item?.income/1e18}</td>
                         {/* <td>{item.level}</td>
                         <td>{item.totalReward}</td> */}
                         {/* <td>

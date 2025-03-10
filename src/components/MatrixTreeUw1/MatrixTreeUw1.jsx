@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../../style/matrix.css";
 import { Link } from "react-router-dom";
 import { useAccount } from "wagmi";
@@ -158,6 +158,15 @@ const MatrixTree = () => {
       if (address) getMatrixIncome();
     }, [address, selectedSlot]);
 
+        const hasSetCycle = useRef(false); 
+    
+        useEffect(() => {
+          if (!hasSetCycle.current && reEntry !== undefined && reEntry !== null & reEntry !== "") {
+            setCycle(reEntry);
+            hasSetCycle.current = true; // Prevent future updates
+          }
+        }, [reEntry]);
+
   return (
     <>
       <div className="main-content app-content">
@@ -205,14 +214,14 @@ const MatrixTree = () => {
                   disabled={blocks[0]?.cycle === 0 ? true:false}
                   className="btn btn-success btn-wave"
                   style={{marginRight: "12px"}}
-                  onClick={()=>setCycle(reEntry > 0 ? reEntry - 1 : "")}
+                  onClick={()=>setCycle(reEntry > 0 ? cycle - 1 : "")}
                 >
                 {"<"}
                 </button>
                 <button
                   type="button"
                   className="btn btn-success btn-wave"
-                  disabled={blocks[0]?.cycle === reEntry ? true:false}
+                  disabled={cycle === reEntry ? true:false}
                   style={{marginLeft: "12px"}}
                   onClick={()=>setCycle(reEntry > 0 ? cycle + 1 : "")}
                 >
