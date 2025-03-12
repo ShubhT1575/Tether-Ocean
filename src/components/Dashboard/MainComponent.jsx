@@ -109,7 +109,7 @@ function MainComponent() {
                 Dashboard
               </h1>
             </div>
-            {dashboardData?.referrerId && (
+            {dashboardData?.userDetails?.referrerId && (
               <div className="d-flex" style={{ marginTop: "10px" }}>
                 <div className="input-group mb-3">
                   <div className="input-group-prepend">
@@ -126,7 +126,7 @@ function MainComponent() {
                     className="form-control"
                     id="input-text"
                     aria-describedby="basic-addon3"
-                    value={`${baseUrl}/SignUp?ref=${dashboardData?.userId}`}
+                    value={`${baseUrl}/SignUp?ref=${dashboardData?.userDetails?.userId}`}
                     readOnly
                     style={{
                       borderRadius: "0",
@@ -151,7 +151,7 @@ function MainComponent() {
         <DashboardRowHead/>
         <DashboardRow1 />
         <DashboardRow2 />
-        <DashboardRow3 />
+        {/* <DashboardRow3 /> */}
         {/* <DashboardRow4 /> */}
         {/* row  end */}
       </div>

@@ -23,14 +23,15 @@ function CoreBody() {
 
   const getGlobalIncome = async () => {
     try {
-      const response = await axios.get(apiUrl + "/getStakingRewardList", {
+      const response = await axios.get(apiUrl + "/recentincome", {
         params: {
-          address: address,
-          page: currentPage,
+          user: address,
+          // page: currentPage,
         },
       });
-      if (response?.data?.status === 200) {
-        setGlobalIncome(response?.data?.data);
+      if (response) {
+        setGlobalIncome(response?.data);
+        console.log(response?.data,"dataa")
       } else {
         setGlobalIncome([]);
       }
@@ -47,7 +48,7 @@ function CoreBody() {
       <div className="col-xl-12">
         <div className="card custom-card overflow-hidden">
           <div className="card-header justify-content-between">
-            <div className="card-title">Daily Stake Reward Data</div>
+            <div className="card-title">Recent Income Data</div>
           </div>
 
           <div className="card-body active-tab">
@@ -56,13 +57,14 @@ function CoreBody() {
                 <thead>
                   <tr>
                     <th scope="col">S.NO</th>
-                    <th scope="col">User</th>
+                    <th scope="col">Sender</th>
                     {/* <th scope="col">Sender</th> */}
-                    <th scope="col">Transaction Hash</th>
-                    <th scope="col">Reward</th>
+                    <th scope="col">Matrix</th>
+                    <th scope="col">Level</th>
+                    <th scope="col">Amount</th>
                     {/* <th scope="col">Level</th> */}
                     <th scope="col">Time Stamp</th>
-                    <th scope="col">Status</th>
+                    {/* <th scope="col">Status</th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -70,26 +72,19 @@ function CoreBody() {
                     return (
                       <tr key={item._id}>
                         <td>{index + 1}</td>
-                        <td className="text-warning">{item?.user.slice(0,6)}...{item?.user.slice(-6)}</td>
+                        <td className="text-warning">{item?.senderUserId}</td>
                         <td>
-                          <a
-                            href={`https://opbnb-testnet.bscscan.com/tx/${item.txHash}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{ color: "rgb(0, 119, 181)" }}
-                          >
-                            {item.txHash?.slice(0, 6)}...
-                            {item.txHash?.slice(-6)}
-                          </a>
+                            {item?.matrixId}
                         </td>
-                        <td>$ {item.reward}</td>
+                        <td>{item?.level == 0 ? "":item?.level}</td>
+                        <td>$ {item?.amount/1e18}</td>
                         {/* <td>{item.level}</td> */}
-                        <td>{new Date(item.timestamp).toLocaleString()}</td>
-                        <td>
+                        <td>{new Date(item?.createdAt).toLocaleString()}</td>
+                        {/* <td>
                           <span className="badge bg-success-transparent">
                             success
                           </span>
-                        </td>
+                        </td> */}
                       </tr>
                     );
                   })}

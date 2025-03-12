@@ -14,7 +14,7 @@ const MatrixTree = () => {
   const { address } = useAccount();
   const [accessAdress, setAccessAddress] = useState("");
   const { dashboardData } = useSelector((state) => state.bitgold);
-  const { userId } = dashboardData;
+  const { userDetails } = dashboardData;
   const [cycle,setCycle] = useState()
 
   const [childAdd, setChildAdd] = useState();
@@ -159,14 +159,14 @@ const MatrixTree = () => {
       if (address) getMatrixIncome();
     }, [address, selectedSlot]);
 
-            const hasSetCycle = useRef(false); 
-        
-            useEffect(() => {
-              if (!hasSetCycle.current && reEntry !== undefined && reEntry !== null & reEntry !== "") {
-                setCycle(reEntry);
-                hasSetCycle.current = true; // Prevent future updates
-              }
-            }, [reEntry]);
+    const hasSetCycle = useRef(false); 
+
+    useEffect(() => {
+      if (!hasSetCycle.current && reEntry !== undefined && reEntry !== null & reEntry !== "") {
+        setCycle(reEntry);
+        hasSetCycle.current = true; // Prevent future updates
+      }
+    }, [reEntry]);
 
 
   return (
@@ -195,8 +195,8 @@ const MatrixTree = () => {
           <div className="verticals twelve">
             <section className="management-tree card custom-card school-card">
               
-              <div className="btn-group align-self-end mb-3">
-              <button
+            <div className="btn-group align-self-end mb-3">
+                <button
                   type="button"
                   className="btn btn-success-ghost btn-wave"
                 >
@@ -214,7 +214,7 @@ const MatrixTree = () => {
               <div className="btn-group align-self-end mb-3">
                 <button
                   type="button"
-                  disabled={blocks[0]?.cycle === 0 ? true:false}
+                  disabled={cycle === 0 ? true:false}
                   className="btn btn-success btn-wave"
                   style={{marginRight: "12px"}}
                   onClick={()=>setCycle(reEntry > 0 ? cycle - 1 : "")}
@@ -466,7 +466,7 @@ const MatrixTree = () => {
                     <div className="mgt-item-parent">
                       <div className="person">
                         <div className="person-profile"></div>
-                        <p className="name">{childAdd ? childUser : userId}</p>
+                        <p className="name">{childAdd ? childUser : userDetails?.userId}</p>
                       </div>
                     </div>
 

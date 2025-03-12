@@ -16,7 +16,7 @@ const MatrixTree = () => {
   const { address } = useAccount();
   const [accessAdress, setAccessAddress] = useState("");
   const { dashboardData } = useSelector((state) => state.bitgold);
-  const { userId } = dashboardData;
+  const { userDetails } = dashboardData;
 
   const [childAdd, setChildAdd] = useState();
   const [childUser, setChildUser] = useState();
@@ -429,7 +429,7 @@ const MatrixTree = () => {
                     <div className="mgt-item-parent">
                       <div className="person">
                         <div className="person-profile"></div>
-                        <p className="name">{childAdd ? childUser : userId}</p>
+                        <p className="name">{childAdd ? childUser : userDetails?.userId}</p>
                       </div>
                     </div>
 
@@ -555,7 +555,7 @@ const MatrixTree = () => {
                     </div>
                   </div>
 
-                  <div className="card-footer pagination-body">
+                  {/* <div className="card-footer pagination-body">
                     <div className="d-flex align-items-center justify-content-between">
                       <div>
                         Showing {matrixIncome?.length || 0} Matrix Income
@@ -590,7 +590,7 @@ const MatrixTree = () => {
                         <span>Page {currentPage} of {totalPages}</span>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

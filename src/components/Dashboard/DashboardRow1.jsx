@@ -356,7 +356,7 @@ function DashboardRow1() {
                   <div className="card custom-card school-card">
                     <div className="card-body d-flex gap-2 justify-content-between">
                       <div>
-                        <span className="d-block mb-1">Referral Reward</span>
+                        <span className="d-block mb-1">Direct Team</span>
                         <h6 className="mb-0 fw-semibold">
                           {directteam || 0}
                         </h6>
@@ -375,7 +375,7 @@ function DashboardRow1() {
                   <div className="card custom-card school-card">
                     <div className="card-body d-flex gap-2 justify-content-between">
                       <div>
-                        <span className="d-block mb-1">Rank Reward</span>
+                        <span className="d-block mb-1">All Team</span>
                         <div className="d-flex gap-3">
                           <h6 className="mb-0 fw-semibold">
                             {allteam || 0}
@@ -391,7 +391,7 @@ function DashboardRow1() {
                       </div>
                       <div>
                         <span className="text-primary1">
-                          <img src={rankReward} alt="" style={{ width: "40px" }} />
+                          <img src={Login} alt="" style={{ width: "40px" }} />
                         </span>
                       </div>
                     </div>
@@ -403,10 +403,10 @@ function DashboardRow1() {
                   <div className="card custom-card school-card">
                     <div className="card-body d-flex gap-2 justify-content-between">
                       <div>
-                        <span className="d-block mb-1"> Stake Reward</span>
+                        <span className="d-block mb-1">Direct Income</span>
                         <div className="d-flex gap-3">
                           <h6 className="mb-0 fw-semibold">
-                            {directincome || 0}
+                            {directincome/1e18 || 0}
                           </h6>
                           {/* <span
                             className="text-warning badge bg-success-transparent rounded-pill d-flex align-items-center fs-11 me-0 ms-2 mb-0 px-2"
@@ -447,10 +447,10 @@ function DashboardRow1() {
                   <div className="card custom-card school-card">
                     <div className="card-body d-flex gap-2 justify-content-between">
                       <div>
-                        <span className="d-block mb-1"> Login Reward</span>
+                        <span className="d-block mb-1">Level Income</span>
                         <div className="d-flex gap-1">
                           <h6 className="mb-0 fw-semibold">
-                            {levelIncome || 0}
+                            {levelIncome/1e18 || 0}
                           </h6>
                           {/* {isDivEnabled && (
                             <span
@@ -465,7 +465,7 @@ function DashboardRow1() {
                       </div>
                       <div>
                         <span className="text-primary">
-                          <img src={Login} alt="" style={{ width: "40px" }} />
+                          <img src={rankReward} alt="" style={{ width: "40px" }} />
                         </span>
                       </div>
                     </div>
@@ -569,14 +569,14 @@ function DashboardRow1() {
               <div className="card custom-card school-card">
                 <div className="card-body d-flex gap-2 justify-content-between">
                   <div>
-                    <span className="d-block mb-1">Fund Wallet</span>
+                    <span className="d-block mb-1">Total Income</span>
                     <div className="">
                       <h6 className="mb-0 fw-semibold">
                         {/* {(dashboard &&
                           Number(dashboard[11].fundingWallet) /
                             ("1e" + tokenDecimals)) ||
                           0.0} */}
-                          {totalincome || 0}
+                          {totalincome/1e18 || 0}
                       </h6>
                     </div>
                   </div>
@@ -594,11 +594,11 @@ function DashboardRow1() {
               <div className="card custom-card school-card">
                 <div className="card-body d-flex gap-2 justify-content-between">
                   <div>
-                    <span className="d-block mb-1"> Reward Wallet</span>
+                    <span className="d-block mb-1">Today Bonus</span>
                     <div className="">
                       {" "}
                       <h6 className="mb-0 fw-semibold">
-                        {todayBonus || 0}
+                        {todayBonus/1e18 || 0}
                       </h6>
                     </div>
                   </div>

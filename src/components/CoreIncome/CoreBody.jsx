@@ -88,7 +88,7 @@ function CoreBody() {
       <div className="col-xl-12">
         <div className="card custom-card overflow-hidden">
           <div className="card-header justify-content-between">
-            <div className="card-title">Daily Login Reward Data</div>
+            <div className="card-title">Direct Team Data</div>
           </div>
 
           <div className="card-body active-tab">
@@ -148,7 +148,7 @@ function CoreBody() {
               </table>
               {directTeam?.length === 0 && (
                 <div className=" w-100">
-                  <div className="w-100 text-center p-3">No Data Found.</div>
+                  <div className="w-100 text-center p-3">No Data Found</div>
                 </div>
               )}
             </div>
@@ -157,7 +157,7 @@ function CoreBody() {
           <div className="card-footer pagination-body">
             <div className="d-flex align-items-center justify-content-between">
               <div>
-                Showing {paginatedLevels?.length || 0} Daily Login Reward
+                Showing {paginatedLevels?.length || 0} Direct Team Data
                 <i className="bi bi-arrow-right ms-2 fw-semibold"></i>
               </div>
               <div>

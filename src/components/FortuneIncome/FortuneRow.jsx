@@ -24,16 +24,16 @@ function CoreBody() {
 
   const getCoreIncome = async () => {
     try {
-      const response = await axios.get(apiUrl + "/getFundWalletList", {
+      const response = await axios.get(apiUrl + "/levelincome", {
         params: {
-          address: address,
-          page: currentPage,
+          user: address,
         },
       });
       
        console.log(response, "]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]");
-      if (response?.data?.status === 200) {
-        setDirectUser(response?.data?.data);
+      if (response) {
+        setDirectUser(response?.data);
+        console.log(response?.data,"Data")
       } else {
         setDirectUser([]);
       }
@@ -50,7 +50,7 @@ function CoreBody() {
       <div className="col-xl-12">
         <div className="card custom-card overflow-hidden">
           <div className="card-header justify-content-between">
-            <div className="card-title">Fund Wallet Reward Data</div>
+            <div className="card-title">Level Income Data</div>
           </div>
 
           <div className="card-body active-tab">
@@ -59,11 +59,11 @@ function CoreBody() {
                 <thead>
                   <tr>
                     <th scope="col">S.NO</th>
-                    <th scope="col">User</th>
-                    <th scope="col">Transaction Hash</th>
-                    <th scope="col">Reward</th>
+                    <th scope="col">Sender</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Level</th>
                     <th scope="col">Time Stamp</th>
-                    <th scope="col">Status</th>
+                    {/* <th scope="col">Status</th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -72,25 +72,18 @@ function CoreBody() {
                       <tr key={item._id}>
                         <td>{index + 1}</td>
                         <td className="text-warning">
-                          {item?.user.slice(0, 6)}...{item?.user.slice(-6)}
+                          {item?.senderId}
                         </td>
                         <td>
-                          <a
-                            href={`https://opbnb-testnet.bscscan.com/tx/${item.txHash}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{ color: "rgb(0, 119, 181)" }}
-                          >
-                            {item.txHash}
-                          </a>
+                            {item.amount/1e18}
                         </td>
-                        <td>$ {item.amount}</td>
-                        <td>{new Date(item.timestamp).toLocaleString()}</td>
-                        <td>
+                        <td>$ {item.level}</td>
+                        <td>{new Date(item.createdAt).toLocaleString()}</td>
+                        {/* <td>
                           <span className="badge bg-success-transparent">
                             success
                           </span>
-                        </td>
+                        </td> */}
                       </tr>
                     );
                   })}

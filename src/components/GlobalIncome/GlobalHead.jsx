@@ -13,12 +13,12 @@ function CoreHead() {
               <a href="#"> Page </a>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
-              Daily Stake Reward
+              Recent Income
             </li>
           </ol>
         </nav>
         <h1 className="page-title fw-medium fs-18 mb-0 text-light">
-          Daily Stake Reward
+          Recent Income
         </h1>
       </div>
     </div>

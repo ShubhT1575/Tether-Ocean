@@ -14,7 +14,7 @@ const MatrixTree = () => {
   const { address } = useAccount();
   const [accessAdress, setAccessAddress] = useState("");
   const { dashboardData } = useSelector((state) => state.bitgold);
-  const { userId } = dashboardData;
+  const { userDetails } = dashboardData;
   const [cycle,setCycle] = useState()
  
   const [childAdd, setChildAdd] = useState();
@@ -463,7 +463,7 @@ const MatrixTree = () => {
                     <div className="mgt-item-parent">
                       <div className="person">
                         <div className="person-profile"></div>
-                        <p className="name">{childAdd ? childUser : userId}</p>
+                        <p className="name">{childAdd ? childUser : userDetails?.userId}</p>
                       </div>
                     </div>
 
