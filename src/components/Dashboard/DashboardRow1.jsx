@@ -406,7 +406,7 @@ function DashboardRow1() {
                         <span className="d-block mb-1">Direct Income</span>
                         <div className="d-flex gap-3">
                           <h6 className="mb-0 fw-semibold">
-                            {directincome/1e18 || 0}
+                            {directincome || 0}
                           </h6>
                           {/* <span
                             className="text-warning badge bg-success-transparent rounded-pill d-flex align-items-center fs-11 me-0 ms-2 mb-0 px-2"
@@ -450,7 +450,7 @@ function DashboardRow1() {
                         <span className="d-block mb-1">Level Income</span>
                         <div className="d-flex gap-1">
                           <h6 className="mb-0 fw-semibold">
-                            {levelIncome/1e18 || 0}
+                            $ {levelIncome || 0}
                           </h6>
                           {/* {isDivEnabled && (
                             <span
@@ -576,7 +576,7 @@ function DashboardRow1() {
                           Number(dashboard[11].fundingWallet) /
                             ("1e" + tokenDecimals)) ||
                           0.0} */}
-                          {totalincome/1e18 || 0}
+                          $ {totalincome || 0}
                       </h6>
                     </div>
                   </div>
@@ -598,7 +598,7 @@ function DashboardRow1() {
                     <div className="">
                       {" "}
                       <h6 className="mb-0 fw-semibold">
-                        {todayBonus/1e18 || 0}
+                        $ {todayBonus || 0}
                       </h6>
                     </div>
                   </div>

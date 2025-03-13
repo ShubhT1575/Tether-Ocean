@@ -8,6 +8,24 @@ import axios from "axios";
 import { apiUrl } from "../Config";
 import ApexChart from "../Chart/Radar";
 import { Link } from "react-router-dom";
+import deal from "../../assets/img/deal (1).png";
+import { RiWallet3Line } from "react-icons/ri";
+import { RiLoginBoxLine } from "react-icons/ri";
+import bg1 from "../../assets/img/9155702.jpg";
+import bg2 from "../../assets/img/businessman-touching-red-icon-connected.jpg";
+import bg3 from "../../assets/img/SL-0212121-40670-68.jpg";
+import id from "../../assets/img/id.png";
+import sponsor from "../../assets/img/deal.png";
+import rankImg from "../../assets/img/high-quality.png";
+import DateID from "../../assets/img/3d-calendar.png";
+import Ref from "../../assets/img/bonus.png";
+import rankReward from "../../assets/img/reward.png";
+import Stake from "../../assets/img/saving.png";
+import Login from "../../assets/img/profile-protection.png";
+import FundReward from "../../assets/img/money.png";
+import FundWallet from "../../assets/img/wallet.png";
+import Reward from "../../assets/img/reward (1).png";
+import Future from "../../assets/img/old-age.png";
 
 function DashboardRow2() {
   const [TBusiness, setTeamBusiness] = useState();
@@ -19,10 +37,14 @@ function DashboardRow2() {
   const TokenAddress = tokenData?.address;
   const tokenDecimals = tokenData?.decimals;
   const { wallet, dashboardData } = useSelector((state) => state.bitgold);
-  const { directUser, directBusiness, teamBusiness, teamUser } = dashboardData;
+  console.log(dashboardData,"11")
+  // const { directUser, directBusiness, teamBusiness, teamUser } = dashboardData;
   const { walletAddress } = wallet;
   const address = walletAddress;
   const [matrixIncome, setMatrixIncome] = useState([]);
+  // const { uw_total_income
+  //   ,directteam,allteam,directincome,levelIncome,totalincome,todayBonus } = dashboardData;
+  
 
   // async function fetchData() {
   //   try {
@@ -137,17 +159,15 @@ function DashboardRow2() {
 
   const getMatrixIncome = async () => {
     try {
-      const response = await axios.get(apiUrl + "/matrixincome", {
+      const response = await axios.get(apiUrl + "/recentincome", {
         params: {
-          userId: address,
-          matrix: 1,
-          slot: 1
+          user: address,
         },
       });
-      if (response?.status === 200) {
-        console.log(response.data.user_income, "repp");
+      if (response) {
+        console.log(response.data, "repp");
 
-        setMatrixIncome(response?.data?.user_income || []);
+        setMatrixIncome(response?.data || []);
         console.log(matrixIncome, "Matrix");
         // setTotalPages(response?.data?.totalPages);
       } else {
@@ -162,7 +182,7 @@ function DashboardRow2() {
   }, [address]);
 
   return (
-    <div className="row">
+    <div className="row d-flex justify-content-between">
       {/* Profit */}
       {/* <div className="col-sm-12 col-md-4 col-xxl-4">
         <div className="card custom-card wrapper">
@@ -1118,7 +1138,7 @@ function DashboardRow2() {
         </div>
       </div> */}
 
-      <div className="col-sm-12 col-md-4 col-xxl-4">
+      {/* <div className="col-sm-12 col-md-4 col-xxl-4">
         <div
           className="card custom-card overflow-hidden"
           style={{ height: "483px"}}
@@ -1178,7 +1198,7 @@ function DashboardRow2() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* <div className="col-sm-12  col-md-6 col-xxl-6">
         <div className="card custom-card">
           <div className="card-header justify-content-between position-absolute">
@@ -1191,139 +1211,348 @@ function DashboardRow2() {
           </div>
         </div>
       </div> */}
-      <div className="col-sm-12  col-md-4 col-xxl-4">
-        <div className="card custom-card" style={{ height: "483px" }}>
-          <div className="card-header justify-content-between">
-            <div className="card-title">Direct and Team Data</div>
-          </div>
-          <div className="card-body">
-            <ul className="list-unstyled mb-0">
-              <li className="list-group-item border-0 p-0 mb-4">
-                <div className="d-flex justify-content-between align-items-top">
-                  <div className="d-flex">
-                    <span className="avatar avatar-rounded avatar-md bg-primary-transparent">
-                      <i className="bx bx-money-withdraw fs-18"></i>
-                    </span>
-                    <div className="d-flex ms-2 align-items-center">
-                      <span className="fw-medium mb-0">Total Direct Users</span>
-                      {/* <p className="fs-12  mb-0">10% Increases</p> */}
+        <div
+                className="row col-sm-12 col-md-12 col-lg-8 left-row-cards"
+                style={{ paddingRight: "0px"}}
+              >
+                <div className="col-sm-6 col-lg-6">
+                  <div className="">
+                    <div className="card custom-card school-card">
+                      <div className="card-body d-flex gap-2 justify-content-between">
+                        <div>
+                          <div className="d-flex gap-2">
+                            <span className="d-block mb-1">Uw income</span>
+                            {/* <div
+                              className="text-success badge bg-success-transparent rounded-pill d-flex align-items-center fs-11 me-0 ms-2 mb-0 "
+                              style={{
+                                width: "fit-content",
+                                height: "fit-content",
+                                cursor: "pointer",
+                              }}
+                            >
+                              Monthly Activated
+                            </div> */}
+                          </div>
+                          <h6 className="mb-0 fw-semibold">{dashboardData?.uw_total_income}</h6>
+                        </div>
+                        <div>
+                          <span className="text-primary">
+                            <img src={id} alt="" style={{ width: "40px" }} />
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <h6 className="fw-medium mb-0">{directUser || 0.0}</h6>
                 </div>
-                <div
-                  className="progress progress-xs mt-2 mb-0"
-                  role="progressbar"
-                  aria-label="Basic example"
-                  aria-valuenow="80"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                >
-                  <div
-                    className="progress-bar progress-bar-striped progress-bar-animated bg-primary"
-                    style={{ width: "100%" }}
-                  ></div>
-                </div>
-              </li>
-              <li className="list-group-item border-0 p-0 mb-4">
-                <div className="d-flex justify-content-between align-items-top">
-                  <div className="d-flex">
-                    <span className="avatar avatar-md avatar-rounded bg-secondary-transparent">
-                      <i className="bx bx-money-withdraw fs-18"></i>
-                    </span>
-                    <div className="d-flex ms-2 align-items-center">
-                      <span className="fw-medium mb-0">
-                        Total Direct Business
-                      </span>
+                <div className="col-sm-6 col-lg-6">
+                  <div>
+                    <div className="card custom-card school-card">
+                      <div className="card-body d-flex gap-2 justify-content-between">
+                        <div>
+                          <span className="d-block mb-1">Uwn1  income</span>
+                          <h6 className="mb-0 fw-semibold">
+                          {dashboardData?.uwn1_total_income}
+                          </h6>
+                        </div>
+                        <div>
+                          <span className="text-primary1">
+                            <img src={sponsor} alt="" style={{ width: "40px" }} />
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <h6 className="fw-medium mb-0">
-                    {/* ${directBusiness || 0.00} */}${" "}
-                    {TBusiness &&
-                      Number(TBusiness) / Number("1e" + tokenDecimals)}
-                  </h6>
                 </div>
-                <div
-                  className="progress progress-xs mt-2 mb-0"
-                  role="progressbar"
-                  aria-label="Basic example"
-                  aria-valuenow="75"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                >
-                  <div
-                    className="progress-bar progress-bar-striped progress-bar-animated bg-success"
-                    style={{ width: " 100%" }}
-                  ></div>
-                </div>
-              </li>
-              <li className="list-group-item border-0 p-0 mb-4">
-                <div className="d-flex justify-content-between align-items-top">
-                  <div className="d-flex">
-                    <span className="avatar avatar-md avatar-rounded bg-primary1-transparent">
-                      <i className="bx bx-money-withdraw fs-18"></i>
-                    </span>
-                    <div className="d-flex ms-2 align-items-center">
-                      <span className="fw-medium mb-0">Total Team Users</span>
-                      {/* <p className="fs-12 mb-0">11% Decrease</p> */}
+                <div className="col-sm-6 col-lg-6">
+                  <div>
+                    <div className="card custom-card school-card">
+                      <div className="card-body d-flex gap-2 justify-content-between">
+                        <div>
+                          <span className="d-block mb-1">Uwn2  income</span>
+                          <h6 className="mb-0 fw-semibold">
+                            {/* {dashboard && Number(dashboard[3])} */}
+                            {dashboardData?.uwn2_total_income}
+                          </h6>
+                        </div>
+                        <div>
+                          <span className="text-primary2">
+                            <img src={rankImg} alt="" style={{ width: "40px" }} />
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <h6 className="fw-medium mb-0">
-                    {dashboard && Number(dashboard[2])}
-                  </h6>
                 </div>
-                <div
-                  className="progress progress-xs mt-2 mb-0"
-                  role="progressbar"
-                  aria-label="Basic example"
-                  aria-valuenow="78"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                >
-                  <div
-                    className="progress-bar progress-bar-striped progress-bar-animated bg-primary2"
-                    style={{ width: "100%" }}
-                  ></div>
-                </div>
-              </li>
-              <li className="list-group-item border-0 p-0 mb-2">
-                <div className="d-flex justify-content-between align-items-top">
-                  <div className="d-flex">
-                    <span className="avatar avatar-md avatar-rounded bg-primary2-transparent">
-                      <i className="bx bx-money-withdraw fs-18"></i>
-                    </span>
-                    <div className="d-flex align-items-center ms-2">
-                      <span className="fw-medium mb-0">
-                        Total Team Business
-                      </span>
+                <div className="col-sm-6 col-lg-6">
+                  <div>
+                    <div className="card custom-card school-card">
+                      <div className="card-body d-flex gap-2 justify-content-between">
+                        <div>
+                          <span className="d-block mb-1">Uwn3  income</span>
+                          <h6 className="mb-0 fw-semibold">
+                          {dashboardData?.uwn3_total_income}
+                          </h6>
+                        </div>
+                        <div>
+                          <span className="text-primary2">
+                            <img src={DateID} alt="" style={{ width: "40px" }} />
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <h6 className="fw-medium mb-0">
-                    ${" "}
-                    {(dashboard &&
-                      Number(dashboard[9]) / Number("1e" + tokenDecimals)) -
-                      (TBusiness &&
-                        Number(TBusiness) / Number("1e" + tokenDecimals))}
-                  </h6>
                 </div>
-                <div
-                  className="progress progress-xs mt-2 mb-0"
-                  role="progressbar"
-                  aria-label="Basic example"
-                  aria-valuenow="68"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                >
+                    <div className="col-sm-6 col-lg-6">
+                      <div className="">
+                        <div className="card custom-card school-card">
+                          <div className="card-body d-flex gap-2 justify-content-between">
+                            <div>
+                              <span className="d-block mb-1">Uwn4  income</span>
+                              <h6 className="mb-0 fw-semibold">
+                              {dashboardData?.uwn4_total_income}
+                              </h6>
+                            </div>
+                            <div>
+                              <span className="text-primary">
+                                <img src={Ref} alt="" style={{ width: "40px" }} />
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-sm-6 col-lg-6">
+                      <div>
+                        <div className="card custom-card school-card">
+                          <div className="card-body d-flex gap-2 justify-content-between">
+                            <div>
+                              <span className="d-block mb-1">Uwn5  income</span>
+                              <div className="d-flex gap-3">
+                                <h6 className="mb-0 fw-semibold">
+                                {dashboardData?.uwn5_total_income}
+                                </h6>
+                                {/* <span
+                                  className="text-primary badge bg-success-transparent rounded-pill d-flex align-items-center fs-11 me-0 ms-2 mb-0 px-2"
+                                  style={{ cursor: "pointer" }}
+                                  // onClick={ClaimRankReward}
+                                >
+                                  Claim
+                                </span> */}
+                              </div>
+                            </div>
+                            <div>
+                              <span className="text-primary1">
+                                <img src={Login} alt="" style={{ width: "40px" }} />
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-sm-6 col-lg-6">
+                      <div>
+                        <div className="card custom-card school-card">
+                          <div className="card-body d-flex gap-2 justify-content-between">
+                            <div>
+                              <span className="d-block mb-1">Uwn6  income</span>
+                              <div className="d-flex gap-3">
+                                <h6 className="mb-0 fw-semibold">
+                                {dashboardData?.uwn6_total_income}
+                                </h6>
+                                {/* <span
+                                  className="text-warning badge bg-success-transparent rounded-pill d-flex align-items-center fs-11 me-0 ms-2 mb-0 px-2"
+                                  style={{ cursor: "pointer" }}
+                                  // onClick={UserClaimStakeReward}
+                                >
+                                  Claim
+                                </span> */}
+                                <div>
+                                  <span
+                                    className="text-primary1"
+                                    style={{
+                                      position: "absolute",
+                                      right: "15px",
+                                      top: "15px",
+                                    }}
+                                  >
+                                    <img
+                                      src={FundReward}
+                                      alt=""
+                                      style={{ width: "40px" }}
+                                    />
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                            <div>
+                              <span className="text-primary2">
+                                <img src={Stake} alt="" style={{ width: "40px" }} />
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+              
+                {/* <div className="col-sm-6 col-lg-6">
                   <div
-                    className="progress-bar progress-bar-striped progress-bar-animated bg-danger"
-                    style={{ width: " 100%" }}
-                  ></div>
+                    className="modal fade"
+                    id="exampleModal"
+                    tabindex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                  >
+                    <div className="modal-dialog">
+                      <div className="modal-content">
+                        <div className="modal-header d-flex justify-content-between">
+                          <div>
+                            <h5 className="modal-title" id="exampleModalLabel">
+                              Fund Wallet Stake
+                            </h5>
+                          </div>
+                          <div>
+                            <button
+                              type="button"
+                              className="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
+                          </div>
+                        </div>
+                        <div className="modal-body">
+                          <div className="col-xl-12">
+                            <label
+                              for="signup-firstname"
+                              className="form-label text-default"
+                            >
+                              Stake Amount<sup className="fs-12 text-danger">*</sup>
+                            </label>
+                            <input
+                              type="Number"
+                              className="form-control"
+                              id="signup-firstname"
+                              placeholder="Enter Stake Amount"
+                            />
+                          </div>
+                        </div>
+                        <div className="modal-footer justify-content-center">
+                          <button type="button" className="btn btn-primary w-50">
+                            Deposit
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="card custom-card school-card">
+                      <div className="card-body d-flex gap-2 justify-content-between">
+                        <div>
+                          <span className="d-block mb-1" style={{ fontSize: "14px" }}>
+                            Fund Wallet Reward
+                          </span>
+                          <div className="d-flex gap-3">
+                            <h6 className="mb-0 fw-semibold">
+                              ${" "}
+                              {FundWReward &&
+                                FundWReward / Number("1e" + tokenDecimals)}
+                            </h6>
+                            <span
+                              className="text-info badge bg-success-transparent rounded-pill d-flex align-items-center fs-11 me-0 ms-2 mb-0 px-2 "
+                              data-bs-toggle="modal"
+                              data-bs-target="#exampleModal"
+                              style={{ cursor: "pointer" }}          <div className="col-sm-6 col-lg-6">
+                  <div>
+                    <div className="card custom-card school-card">
+                      <div className="card-body d-flex gap-2 justify-content-center">
+                      <a href="https://app.uniswap.org/swap">
+                        <button className="btn-buyCrpto w-100">SELL CRYPTO</button>
+                      </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+                              // onClick={getReawrd}
+                            >
+                              Deposit
+                            </span>
+                          </div>
+                        </div>
+                        <div>
+                          <span className="text-primary1">
+                            <img src={FundReward} alt="" style={{ width: "40px" }} />
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> */}
+             
+                {/* <div className="col-sm-6 col-lg-6">
+                  <div>
+                    <div className="card custom-card school-card">
+                      <div className="card-body d-flex gap-2 justify-content-between">
+                        <div>
+                          <span className="d-block mb-1">Future Wallet</span>
+                          <h6 className="mb-0 fw-semibold">
+                            0
+                          </h6>
+                        </div>
+                        <div>
+                          <span className="text-primary1">
+                            <img src={Future} alt="" style={{ width: "40px" }} />
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> */}
+                {/* <div className="col-sm-6 col-lg-6">
+                  <div>
+                    <div className="card custom-card school-card">
+                      <div className="card-body d-flex gap-2 justify-content-center">
+                      <a href="#stakeID">
+                        <button className="btn-buyCrpto w-100">STAKE</button>
+                      </a>
+                      </div>
+                    </div>
+                  </div>
+                </div> */}
+                {/* <div className="col-sm-6 col-lg-6">
+                  <div>
+                    <div className="card custom-card school-card">
+                      <div className="card-body d-flex gap-2 justify-content-center">
+                      <a href="https://app.uniswap.org/swap">
+                        <button className="btn-buyCrpto w-100">BUY CRYPTO</button>
+                      </a>
+                      </div>
+                    </div>
+                  </div>
+                </div> */}
+                {/* <div className="col-sm-6 col-lg-6">
+                  <div>
+                    <div className="card custom-card school-card">
+                      <div className="card-body d-flex gap-2 justify-content-center">
+                      <Link to="/Withdraw" style={{ cursor: "pointer" }}>
+                        <button className="btn-buyCrpto w-100 ">
+                          TRANSFER REWARD
+                        </button>
+                      </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div> */}
+                {/* <div className="col-sm-6 col-lg-6">
+                  <div>
+                    <div className="card custom-card school-card">
+                      <div className="card-body d-flex gap-2 justify-content-center">
+                      <a href="https://app.uniswap.org/swap">
+                        <button className="btn-buyCrpto w-100">SELL CRYPTO</button>
+                      </a>
+                      </div>
+                    </div>
+                  </div>
+                </div> */}
+              </div>
 
       <div className="col-sm-12 col-md-4 col-xxl-4">
         <div
@@ -1331,31 +1560,30 @@ function DashboardRow2() {
           style={{ height: "483px" }}
         >
           <div className="card-header justify-content-between">
-            <div className="card-title">Matrix Income</div>
+            <div className="card-title">Recent Income</div>
           </div>
           <div className="card-body p-0" style={{ height: "406px" }}>
             <div className="table-responsive">
               <table className="table text-nowrap text-center direct-data-table">
                 <thead>
                   <tr>
-                    <th scope="col">Referrer</th>
+                    <th scope="col">User</th>
                     <th scope="col">Matrix</th>
                     {/* <th scope="col">Level</th> */}
-                    <th scope="col">Slot Id</th>
+                    <th scope="col">Level</th>
                     <th scope="col">Amount</th>
                   </tr>
                 </thead>
                 <tbody>
                   {paginatedLevels?.map((rep, index) => (
                     <tr key={index}>
-                      <td>{`${rep.sender.slice(0, 6)}...${rep.sender.slice(
-                        -4
-                      )}`}</td>
+                      <td>{rep.senderUserId}</td>
                       <td style={{ color: "rgb(0, 119, 181)" }}>
                         {rep.matrixId}
                       </td>
                       {/* <td>{rep.now_level}</td> */}
-                      <td>{rep.slotId}</td>
+                      <td>{rep.level
+                      }</td>
                       <td>$ {rep.amount / 1e18}</td>
                     </tr>
                   ))}
@@ -1400,7 +1628,7 @@ function DashboardRow2() {
                   className={`page-item ${matrixIncome?.length === 0? "disabled":""}`}
                 >
                   <Link className="page-link text-primary bg-transparent" to="/MatrixTreeUw">
-                    Navigate to Matrix for full info <i className="fa-solid fa-arrow-trend-up"></i>
+                    Navigate to Recent Income for full info <i className="fa-solid fa-arrow-trend-up"></i>
                   </Link>
                 </li>
               </ul>

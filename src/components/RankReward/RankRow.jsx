@@ -27,12 +27,13 @@ function RankRow() {
     try {
       const response = await axios.get(apiUrl + "/getDetailsByLevel", {
         params: {
-          address: "0x14a10af09768Bc2b02d067D9a77AAC072E84812A",
-          level: currentPage,
+          address: address,
+          level: slot,
         },
       });
-      if (response?.data?.status === 200) {
-        setGlobalIncome(response?.data?.data);
+      if (response) {
+        setGlobalIncome(response?.data?.res);
+        console.log(response?.data?.res,"data")
       } else {
         setGlobalIncome([]);
       }
@@ -43,7 +44,7 @@ function RankRow() {
   console;
   useEffect(() => {
     if (address) getGlobalIncome();
-  }, [address, currentPage]);
+  }, [address, slot]);
   return (
     <div className="row">
       <div className="col-xl-12">
@@ -70,7 +71,7 @@ function RankRow() {
                         height: "14%",
                       }}
                     >
-                      <Link to="/MatrixTreeUw" className="side-menu__item">
+                      <Link to="/RankReward" className="side-menu__item">
                         <span className="side-menu__label">
                           1
                         </span>
@@ -85,7 +86,7 @@ function RankRow() {
                         height: "14%",
                       }}
                     >
-                      <Link to="/MatrixTreeUw" className="side-menu__item">
+                      <Link to="/RankReward" className="side-menu__item">
                         <span className="side-menu__label">2</span>
                       </Link>
                     </li>
@@ -98,7 +99,7 @@ function RankRow() {
                         height: "14%",
                       }}
                     >
-                      <Link to="/MatrixTreeUw" className="side-menu__item">
+                      <Link to="/RankReward" className="side-menu__item">
                         <span className="side-menu__label">3</span>
                       </Link>
                     </li>
@@ -111,7 +112,7 @@ function RankRow() {
                         height: "14%",
                       }}
                     >
-                      <Link to="/MatrixTreeUw" className="side-menu__item">
+                      <Link to="/RankReward" className="side-menu__item">
                         <span className="side-menu__label">4</span>
                       </Link>
                     </li>
@@ -124,7 +125,7 @@ function RankRow() {
                         height: "14%",
                       }}
                     >
-                      <Link to="/MatrixTreeUw" className="side-menu__item">
+                      <Link to="/RankReward" className="side-menu__item">
                         <span className="side-menu__label">5</span>
                       </Link>
                     </li>
@@ -137,7 +138,7 @@ function RankRow() {
                         height: "14%",
                       }}
                     >
-                      <Link to="/MatrixTreeUw" className="side-menu__item">
+                      <Link to="/RankReward" className="side-menu__item">
                         <span className="side-menu__label">6</span>
                       </Link>
                     </li>
@@ -150,7 +151,7 @@ function RankRow() {
                         height: "14%",
                       }}
                     >
-                      <Link to="/MatrixTreeUw" className="side-menu__item">
+                      <Link to="/RankReward" className="side-menu__item">
                         <span className="side-menu__label">7</span>
                       </Link>
                     </li>
@@ -163,8 +164,8 @@ function RankRow() {
                         height: "14%",
                       }}
                     >
-                      <Link to="/MatrixTreeUw" className="side-menu__item">
-                        <span className="side-menu__label">Promoter</span>
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">8</span>
                       </Link>
                     </li>
                     <li
@@ -176,8 +177,8 @@ function RankRow() {
                         height: "14%",
                       }}
                     >
-                      <Link to="/MatrixTreeUw" className="side-menu__item">
-                        <span className="side-menu__label">Advisor</span>
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">9</span>
                       </Link>
                     </li>
                     <li
@@ -189,8 +190,8 @@ function RankRow() {
                         height: "14%",
                       }}
                     >
-                      <Link to="/MatrixTreeUw" className="side-menu__item">
-                        <span className="side-menu__label">Director</span>
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">10</span>
                       </Link>
                     </li>
                     <li
@@ -202,8 +203,8 @@ function RankRow() {
                         height: "14%",
                       }}
                     >
-                      <Link to="/MatrixTreeUw" className="side-menu__item">
-                        <span className="side-menu__label">Achiever</span>
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">11</span>
                       </Link>
                     </li>
                     <li
@@ -215,8 +216,8 @@ function RankRow() {
                         height: "14%",
                       }}
                     >
-                      <Link to="/MatrixTreeUw" className="side-menu__item">
-                        <span className="side-menu__label">Creator</span>
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">12</span>
                       </Link>
                     </li>
                     <li
@@ -228,8 +229,8 @@ function RankRow() {
                         height: "14%",
                       }}
                     >
-                      <Link to="/MatrixTreeUw" className="side-menu__item">
-                        <span className="side-menu__label">Mentor</span>
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">13</span>
                       </Link>
                     </li>
                     <li
@@ -241,8 +242,8 @@ function RankRow() {
                         height: "14%",
                       }}
                     >
-                      <Link to="/MatrixTreeUw" className="side-menu__item">
-                        <span className="side-menu__label">Expert</span>
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">14</span>
                       </Link>
                     </li>
 
@@ -255,8 +256,8 @@ function RankRow() {
                         height: "14%",
                       }}
                     >
-                      <Link to="/MatrixTreeUw" className="side-menu__item">
-                        <span className="side-menu__label">Master</span>
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">15</span>
                       </Link>
                     </li>
                     <li
@@ -268,9 +269,9 @@ function RankRow() {
                         height: "14%",
                       }}
                     >
-                      <Link to="/MatrixTreeUw" className="side-menu__item">
+                      <Link to="/RankReward" className="side-menu__item">
                         <span className="side-menu__label">
-                          Community Legend
+                          16
                         </span>
                       </Link>
                     </li>
@@ -285,11 +286,11 @@ function RankRow() {
                 <thead>
                   <tr>
                     <th scope="col">S.NO</th>
-                    <th scope="col">User ID</th>
-                    <th scope="col">Transaction Hash</th>
-                    <th scope="col">Reward</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Level</th>
+                    <th scope="col">Rank</th>
                     <th scope="col">Time Stamp</th>
-                    <th scope="col">Status</th>
+                    {/* <th scope="col">Status</th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -297,25 +298,12 @@ function RankRow() {
                     return (
                       <tr key={item._id}>
                         <td>{index + 1}</td>
-                        <td>{item?.user.slice(0,6)}...{item?.user.slice(-6)}</td>
+                        <td>{item?.userId}</td>
                         <td>
-                          <a
-                            href={`https://opbnb-testnet.bscscan.com/tx/${item.txHash}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{ color: "rgb(0, 119, 181)" }}
-                          >
-                            {item.txHash?.slice(0, 6)}...
-                            {item.txHash?.slice(-6)}
-                          </a>
+                            {item?.level}
                         </td>
-                        <td>$ {item.reward}</td>
-                        <td>{new Date(item.timestamp).toLocaleString()}</td>
-                        <td>
-                          <span className="badge bg-success-transparent">
-                            success
-                          </span>
-                        </td>
+                        <td>{item?.rank}</td>
+                        <td>{new Date(item?.time).toLocaleString()}</td>
                       </tr>
                     );
                   })}
