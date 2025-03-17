@@ -13,12 +13,12 @@ function RankHead() {
               <a href="#"> Page </a>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
-              Level Team
+              Level Team (Uwn4)
             </li>
           </ol>
         </nav>
         <h1 className="page-title fw-medium fs-18 mb-0 text-light">
-          Level Team
+        Level Team (Uwn4)
         </h1>
       </div>
     </div>

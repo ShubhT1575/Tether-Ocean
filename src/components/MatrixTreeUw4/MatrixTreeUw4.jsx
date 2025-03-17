@@ -516,7 +516,7 @@ const MatrixTree = () => {
                       <table className="table table-bordered text-nowrap mb-0">
                         <thead>
                           <tr>
-                            <th scope="col">Level</th>
+                            <th scope="col">Rank</th>
                             {/* <th scope="col">Matrix</th> */}
                             {/* <th scope="col">Sender</th> */}
                             {/* <th scope="col">Slot</th> */}
@@ -531,7 +531,7 @@ const MatrixTree = () => {
                     return (
                       <tr key={index}>
                       
-                        <td className="text-warning">{item?.level}</td>
+                        <td className="text-warning">{item?.rank} {`(L${index + 1})`}</td>
                         <td className={`${item?.income !== 0 ? "text-danger":"text-light"}`}>$ {item?.income/1e18}</td>
                         {/* <td>{item.level}</td>
                         <td>{item.totalReward}</td> */}

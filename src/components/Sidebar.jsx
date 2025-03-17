@@ -282,7 +282,18 @@ function Sidebar() {
                 onClick={closeSidebar}
               >
                 <RiWallet3Line className="side-menu__icon" />
-                <span className="side-menu__label">Level Team</span>
+                <span className="side-menu__label">Level Team (Uwn4)</span>
+              </Link>
+            </li>
+
+            <li className="slide has-sub">
+              <Link
+                to="/LevelIncome"
+                className="side-menu__item"
+                onClick={closeSidebar}
+              >
+                <RiWallet3Line className="side-menu__icon" />
+                <span className="side-menu__label">Level Team (Uwn5)</span>
               </Link>
             </li>
 

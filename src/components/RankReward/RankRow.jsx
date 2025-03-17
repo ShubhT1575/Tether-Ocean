@@ -8,6 +8,7 @@ function RankRow() {
   const { wallet } = useSelector((state) => state.bitgold);
     const [slot, setSlot] = useState(1);
   const { walletAddress, isConnected } = wallet;
+    const [selectedSlot,setSelectedSlot] = useState(slot)
   const address = walletAddress;
   const [GlobalIncome, setGlobalIncome] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,7 +29,7 @@ function RankRow() {
       const response = await axios.get(apiUrl + "/getDetailsByLevel", {
         params: {
           address: address,
-          level: slot,
+          level: selectedSlot,
         },
       });
       if (response) {
@@ -44,14 +45,33 @@ function RankRow() {
   console;
   useEffect(() => {
     if (address) getGlobalIncome();
-  }, [address, slot]);
+  }, [address, selectedSlot]);
+
+  const slots = [
+    { id: 1, price: 7, name: "Community Member" },
+    { id: 2, price: 7, name: "Beginner" },
+    { id: 3, price: 14, name: "Seeker" },
+    { id: 4, price: 14, name: "Engager" },
+    { id: 5, price: 28, name: "Motivator" },
+    { id: 6, price: 28, name: "Explorer" },
+    { id: 7, price: 56, name: "Soldier" },
+    { id: 8, price: 56, name: "Promoter" },
+    { id: 9, price: 112, name: "Advisor" },
+    { id: 10, price: 112, name: "Director" },
+    { id: 11, price: 224, name: "Achiever" },
+    { id: 12, price: 224, name: "Creator" },
+    { id: 13, price: 448, name: "Mentor" },
+    { id: 14, price: 896, name: "Expert" },
+    { id: 15, price: 1792, name: "Master" },
+    { id: 16, price: 3584, name: "Community Legend" },
+  ];
   return (
     <div className="row">
       <div className="col-xl-12">
         <div className="card custom-card overflow-hidden">
           <div className="card-header justify-content-between">
             <div className="card-title">Rank Reward Data</div>
-      <div className="btn-group align-self-end mb-3">
+      {/* <div className="btn-group align-self-end mb-3">
                 <button
                   type=""
                   className="btn btn-primary-gradient btn-packages "
@@ -277,7 +297,7 @@ function RankRow() {
                     </li>
                   </div>
                 </ul>
-              </div> 
+              </div>  */}
           </div>
 
           <div className="card-body active-tab">
@@ -353,6 +373,45 @@ function RankRow() {
             </div>
           </div>
         </div>
+        <div className="col-sm-12 col-lg-12">
+                <div>
+                  <div
+                    className="card custom-card school-card"
+                    style={{ margin: "0" }}
+                  >
+                    <div
+                      className="card-body d-flex gap-2 justify-content-between "
+                      style={{ height: "150px" }}
+                    >
+                      <div
+                        className="carousel-container bg-crypto-balance"
+                        style={{ borderRadius: "20px" }}
+                      >
+                        <div className="carousel">
+                          {slots.map((slot) => {
+                            return (
+                              <a
+                                href="#"
+                                key={slot.id}
+                                className={`product-card bg-crypto-balance bg-success slot-menu ${selectedSlot === slot.id ? "bg-warning":""}`}
+                                onClick={() => setSelectedSlot(slot.id)}
+                                style={{width:"100px"}}
+                              >
+                                <div
+                                  className="carousel-card-value carousel-card-value carousel-card-value-sucess"
+                                  style={{ height: "30px", fontSize: "15px" }}
+                                >
+                                  {slot.id}
+                                </div>
+                              </a>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
       </div>
     </div>
   );

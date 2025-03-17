@@ -1,67 +1,283 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useAccount } from "wagmi";
 import { apiUrl } from "../Config";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function LevelIncomeBody() {
-
-  const [directUser, setDirectUser] = useState([]);
-  const { address } = useAccount();
-  // console.log(address, 'saadnhufhuh')
-  const itemsPerPage = 8; // Change this to modify items per page
+  const { wallet } = useSelector((state) => state.bitgold);
+    const [slot, setSlot] = useState(1);
+  const { walletAddress, isConnected } = wallet;
+  const address = walletAddress;
+  const [GlobalIncome, setGlobalIncome] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [matrixIncome,setMatrixIncome] = useState([]);
+  const [totalPages, setTotalPages] = useState(1);
 
-  const totalPages = Math.ceil(matrixIncome.length / itemsPerPage);
-
-  const paginatedLevels = matrixIncome.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
-
-  // Handle previous page
-  const handlePreviousPage = () => {
-    if (currentPage > 1) setCurrentPage(currentPage - 1);
-  };
-
-  // Handle next page
   const handleNextPage = () => {
-    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+    setCurrentPage((prevPage) =>
+      prevPage < totalPages ? prevPage + 1 : prevPage
+    );
   };
 
+  const handlePreviousPage = () => {
+    setCurrentPage((prevPage) => (prevPage > 1 ? prevPage - 1 : prevPage));
+  };
 
-  const getMatrixIncome = async () => {
+  const getGlobalIncome = async () => {
     try {
-      const response = await axios.get(apiUrl + "/matrixincome", {
+      const response = await axios.get(apiUrl + "/getDetailsByLevel2", {
         params: {
-          userId: address,
-          matrix: 1,
+          address: address,
+          level: slot,
         },
       });
-      if (response?.status === 200) {
-      console.log(response.data.user_income, "repp")
-
-        setMatrixIncome(response?.data?.user_income || [])
-        console.log(matrixIncome,"Matrix")
-        // setTotalPages(response?.data?.totalPages);
+      if (response) {
+        setGlobalIncome(response?.data?.res);
+        console.log(response?.data?.res,"data")
       } else {
-        setDirectUser([]);
+        setGlobalIncome([]);
       }
     } catch (error) {
       console.error("Error fetching user data:", error.message);
     }
   };
+  console;
   useEffect(() => {
-    if (address) getMatrixIncome();
-  }, [address]);
-
+    if (address) getGlobalIncome();
+  }, [address, slot]);
   return (
     <div className="row">
       <div className="col-xl-12">
         <div className="card custom-card overflow-hidden">
           <div className="card-header justify-content-between">
-            <div className="card-title">Matrix Income Data</div>
+            <div className="card-title">Rank Reward Data</div>
+      <div className="btn-group align-self-end mb-3">
+                <button
+                  type=""
+                  className="btn btn-primary-gradient btn-packages "
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  See Packages
+                </button>
+                <ul className="dropdown-menu drop-ul">
+                  <div className="overflow-div">
+                    <li
+                      className="w-100"
+                      onClick={()=>setSlot(1)}
+                      style={{
+                        paddingBottom: "20px",
+                        paddingTop: "10px",
+                        height: "14%",
+                      }}
+                    >
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">
+                          1
+                        </span>
+                      </Link>
+                    </li>
+                    <li
+                      className="w-100"
+                      onClick={()=>setSlot(2)}
+                      style={{
+                        paddingBottom: "20px",
+                        paddingTop: "20px",
+                        height: "14%",
+                      }}
+                    >
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">2</span>
+                      </Link>
+                    </li>
+                    <li
+                      className="w-100"
+                      onClick={()=>setSlot(3)}
+                      style={{
+                        paddingBottom: "20px",
+                        paddingTop: "20px",
+                        height: "14%",
+                      }}
+                    >
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">3</span>
+                      </Link>
+                    </li>
+                    <li
+                      className="w-100"
+                      onClick={()=>setSlot(4)}
+                      style={{
+                        paddingBottom: "20px",
+                        paddingTop: "20px",
+                        height: "14%",
+                      }}
+                    >
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">4</span>
+                      </Link>
+                    </li>
+                    <li
+                      className="w-100"
+                      onClick={()=>setSlot(5)}
+                      style={{
+                        paddingBottom: "20px",
+                        paddingTop: "20px",
+                        height: "14%",
+                      }}
+                    >
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">5</span>
+                      </Link>
+                    </li>
+                    <li
+                      className="w-100"
+                      onClick={()=>setSlot(6)}
+                      style={{
+                        paddingBottom: "20px",
+                        paddingTop: "20px",
+                        height: "14%",
+                      }}
+                    >
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">6</span>
+                      </Link>
+                    </li>
+                    <li
+                      className="w-100"
+                      onClick={()=>setSlot(7)}
+                      style={{
+                        paddingBottom: "20px",
+                        paddingTop: "20px",
+                        height: "14%",
+                      }}
+                    >
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">7</span>
+                      </Link>
+                    </li>
+                    <li
+                      className="w-100"
+                      onClick={()=>setSlot(8)}
+                      style={{
+                        paddingBottom: "20px",
+                        paddingTop: "20px",
+                        height: "14%",
+                      }}
+                    >
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">8</span>
+                      </Link>
+                    </li>
+                    <li
+                      className="w-100"
+                      onClick={()=>setSlot(9)}
+                      style={{
+                        paddingBottom: "20px",
+                        paddingTop: "20px",
+                        height: "14%",
+                      }}
+                    >
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">9</span>
+                      </Link>
+                    </li>
+                    <li
+                      className="w-100"
+                      onClick={()=>setSlot(10)}
+                      style={{
+                        paddingBottom: "20px",
+                        paddingTop: "20px",
+                        height: "14%",
+                      }}
+                    >
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">10</span>
+                      </Link>
+                    </li>
+                    <li
+                      className="w-100"
+                      onClick={()=>setSlot(11)}
+                      style={{
+                        paddingBottom: "20px",
+                        paddingTop: "20px",
+                        height: "14%",
+                      }}
+                    >
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">11</span>
+                      </Link>
+                    </li>
+                    <li
+                      className="w-100"
+                      onClick={()=>setSlot(12)}
+                      style={{
+                        paddingBottom: "20px",
+                        paddingTop: "20px",
+                        height: "14%",
+                      }}
+                    >
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">12</span>
+                      </Link>
+                    </li>
+                    <li
+                      className="w-100"
+                      onClick={()=>setSlot(13)}
+                      style={{
+                        paddingBottom: "20px",
+                        paddingTop: "20px",
+                        height: "14%",
+                      }}
+                    >
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">13</span>
+                      </Link>
+                    </li>
+                    <li
+                      className="w-100"
+                      onClick={()=>setSlot(14)}
+                      style={{
+                        paddingBottom: "20px",
+                        paddingTop: "20px",
+                        height: "14%",
+                      }}
+                    >
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">14</span>
+                      </Link>
+                    </li>
+
+                    <li
+                      className="w-100"
+                      onClick={()=>setSlot(15)}
+                      style={{
+                        paddingBottom: "20px",
+                        paddingTop: "20px",
+                        height: "14%",
+                      }}
+                    >
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">15</span>
+                      </Link>
+                    </li>
+                    <li
+                      className="w-100"
+                      onClick={()=>setSlot(16)}
+                      style={{
+                        paddingBottom: "35px",
+                        paddingTop: "20px",
+                        height: "14%",
+                      }}
+                    >
+                      <Link to="/RankReward" className="side-menu__item">
+                        <span className="side-menu__label">
+                          16
+                        </span>
+                      </Link>
+                    </li>
+                  </div>
+                </ul>
+              </div> 
           </div>
 
           <div className="card-body active-tab">
@@ -69,40 +285,31 @@ function LevelIncomeBody() {
               <table className="table table-bordered text-nowrap mb-0">
                 <thead>
                   <tr>
-                    <th scope="col">Referrer</th>
-                    <th scope="col">Matrix</th>
-                    {/* <th scope="col">Sender</th> */}
-                    <th scope="col">Slot Id</th>
-                    <th scope="col">Amount</th>
-                    {/* <th scope="col">Level</th>
-                    <th scope="col">Total Reward</th>
-                    <th scope="col">Status</th> */}
+                    <th scope="col">S.NO</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Level</th>
+                    <th scope="col">Rank</th>
+                    <th scope="col">Time Stamp</th>
+                    {/* <th scope="col">Status</th> */}
                   </tr>
                 </thead>
                 <tbody>
-                  {paginatedLevels?.map((item, index) => {
+                  {GlobalIncome?.map((item, index) => {
                     return (
-                      <tr key={index}>
-                        <td className="text-info">{`${item.user.slice(0, 7)}.......${item.user.slice(-5)}`}
+                      <tr key={item._id}>
+                        <td>{index + 1}</td>
+                        <td>{item?.userId}</td>
+                        <td>
+                            {item?.level}
                         </td>
-                        <td className="text-warning">{item?.matrix}</td>
-                        <td className="text-light">
-                            {item.slotId}
-                        </td>
-                        <td className="text-danger">$ {item.amount/1e18}</td>
-                        {/* <td>{item.level}</td> */}
-                        {/* <td>{item.totalReward}</td> */}
-                        {/* <td>
-                          <span className="badge bg-success-transparent">
-                            success
-                          </span>
-                        </td> */}
+                        <td>{item?.rank}</td>
+                        <td>{new Date(item?.time).toLocaleString()}</td>
                       </tr>
                     );
                   })}
                 </tbody>
               </table>
-              {matrixIncome?.length === 0 && (
+              {GlobalIncome?.length === 0 && (
                 <div className=" w-100">
                   <div className="w-100 text-center p-3">No Data Found.</div>
                 </div>
@@ -112,10 +319,7 @@ function LevelIncomeBody() {
 
           <div className="card-footer pagination-body">
             <div className="d-flex align-items-center justify-content-between">
-              <div>
-                Showing {matrixIncome?.length || 0} Matrix Income
-                <i className="bi bi-arrow-right ms-2 fw-semibold"></i>
-              </div>
+              <div>Showing {GlobalIncome?.length || 0} Rank Reward</div>
               <div>
                 <nav
                   aria-label="Page navigation"
