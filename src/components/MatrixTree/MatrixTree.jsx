@@ -47,7 +47,7 @@ const MatrixTree = () => {
       const response = await axios.get(apiUrl + "/uwn3", {
         params: {
           // user: address,
-          user: childAdd ? childAdd :  address,
+          user: childAdd ? childAdd :  "0xfE46ECc6D7c522D9eC1811c247C3709F4E900688",
           slot: slot,
           cycle: cycle
         },
@@ -658,7 +658,7 @@ const MatrixTree = () => {
                           <tr>
                             <th scope="col">Referrer</th>
                             <th scope="col">Matrix</th>
-                            {/* <th scope="col">Sender</th> */}
+                            <th scope="col">Level</th>
                             <th scope="col">Slot</th>
                             <th scope="col">Amount</th>
                             {/* <th scope="col">Level</th>
@@ -673,6 +673,7 @@ const MatrixTree = () => {
                         <td className="text-info">{`${item.sender.slice(0, 7)}.......${item.sender.slice(-5)}`}
                         </td>
                         <td className="text-warning">{item?.matrixId}</td>
+                        <td className="text-warning">{item?.level}</td>
                         <td className="text-light">
                             {item.slotId}
                         </td>

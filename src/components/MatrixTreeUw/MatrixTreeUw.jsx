@@ -616,7 +616,7 @@ const MatrixTree = () => {
                           <tr>
                             <th scope="col">Referrer</th>
                             <th scope="col">Matrix</th>
-                            {/* <th scope="col">Sender</th> */}
+                            {/* <th scope="col">Level</th> */}
                             <th scope="col">Slot</th>
                             <th scope="col">Amount</th>
                             {/* <th scope="col">Level</th>
@@ -631,6 +631,7 @@ const MatrixTree = () => {
                         <td className="text-info">{`${item.sender.slice(0, 7)}.......${item.sender.slice(-5)}`}
                         </td>
                         <td className="text-warning">{item?.matrixId}</td>
+                        {/* <td className="text-warning">{item?.level}</td> */}
                         <td className="text-light">
                             {item.slotId}
                         </td>

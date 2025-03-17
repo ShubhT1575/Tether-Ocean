@@ -101,8 +101,8 @@ function CoreBody() {
                     <th scope="col" className="text-primary">User Address</th>
                     <th scope="col" className="text-primary">Refferal ID</th>
                     <th scope="col" className="text-primary">Refferal Address</th>
-                    {/* <th scope="col">Sender</th> */}
-                    {/* <th scope="col">Transaction Hash</th> */}
+                    <th scope="col" className="text-primary">Rank</th>
+                    <th scope="col" className="text-primary">Direct Count</th>
                     {/* <th scope="col">Amount</th> */}
                     {/* <th scope="col">Level</th> */}
                     <th scope="col" className="text-primary">Joining Date</th>
@@ -122,6 +122,8 @@ function CoreBody() {
                         <td className="text-warning">
                           {item?.referrer.slice(0, 5)}...{item?.referrer.slice(-5)}
                         </td>
+                        <td>{item?.slot_rank}</td>
+                        <td>{item?.directCount}</td>
                         {/* <td>
                           <a
                             href={`https://opbnb-testnet.bscscan.com/tx/${item?.txHash}`}

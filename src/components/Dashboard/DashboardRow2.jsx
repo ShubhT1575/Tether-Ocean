@@ -1212,10 +1212,10 @@ function DashboardRow2() {
         </div>
       </div> */}
         <div
-                className="row col-sm-12 col-md-12 col-lg-8 left-row-cards"
+                className="row col-sm-12 col-md-12 col-lg-12 left-row-cards"
                 style={{ paddingRight: "0px"}}
               >
-                <div className="col-sm-6 col-lg-6">
+                <div className="col-sm-6 col-lg-4">
                   <div className="">
                     <div className="card custom-card school-card">
                       <div className="card-body d-flex gap-2 justify-content-between">
@@ -1244,7 +1244,7 @@ function DashboardRow2() {
                     </div>
                   </div>
                 </div>
-                <div className="col-sm-6 col-lg-6">
+                <div className="col-sm-6 col-lg-4">
                   <div>
                     <div className="card custom-card school-card">
                       <div className="card-body d-flex gap-2 justify-content-between">
@@ -1263,7 +1263,7 @@ function DashboardRow2() {
                     </div>
                   </div>
                 </div>
-                <div className="col-sm-6 col-lg-6">
+                <div className="col-sm-6 col-lg-4">
                   <div>
                     <div className="card custom-card school-card">
                       <div className="card-body d-flex gap-2 justify-content-between">
@@ -1283,7 +1283,7 @@ function DashboardRow2() {
                     </div>
                   </div>
                 </div>
-                <div className="col-sm-6 col-lg-6">
+                <div className="col-sm-6 col-lg-4">
                   <div>
                     <div className="card custom-card school-card">
                       <div className="card-body d-flex gap-2 justify-content-between">
@@ -1302,7 +1302,7 @@ function DashboardRow2() {
                     </div>
                   </div>
                 </div>
-                    <div className="col-sm-6 col-lg-6">
+                    <div className="col-sm-6 col-lg-4">
                       <div className="">
                         <div className="card custom-card school-card">
                           <div className="card-body d-flex gap-2 justify-content-between">
@@ -1321,7 +1321,7 @@ function DashboardRow2() {
                         </div>
                       </div>
                     </div>
-                    <div className="col-sm-6 col-lg-6">
+                    <div className="col-sm-6 col-lg-4">
                       <div>
                         <div className="card custom-card school-card">
                           <div className="card-body d-flex gap-2 justify-content-between">
@@ -1349,7 +1349,7 @@ function DashboardRow2() {
                         </div>
                       </div>
                     </div>
-                    <div className="col-sm-6 col-lg-6">
+                    <div className="col-sm-6 col-lg-4">
                       <div>
                         <div className="card custom-card school-card">
                           <div className="card-body d-flex gap-2 justify-content-between">
@@ -1554,7 +1554,7 @@ function DashboardRow2() {
                 </div> */}
               </div>
 
-      <div className="col-sm-12 col-md-4 col-xxl-4">
+      {/* <div className="col-sm-12 col-md-4 col-xxl-4">
         <div
           className="card custom-card overflow-hidden"
           style={{ height: "483px" }}
@@ -1569,7 +1569,6 @@ function DashboardRow2() {
                   <tr>
                     <th scope="col">User</th>
                     <th scope="col">Matrix</th>
-                    {/* <th scope="col">Level</th> */}
                     <th scope="col">Level</th>
                     <th scope="col">Amount</th>
                   </tr>
@@ -1581,7 +1580,6 @@ function DashboardRow2() {
                       <td style={{ color: "rgb(0, 119, 181)" }}>
                         {rep.matrixId}
                       </td>
-                      {/* <td>{rep.now_level}</td> */}
                       <td>{rep.level
                       }</td>
                       <td>$ {rep.amount / 1e18}</td>
@@ -1599,35 +1597,10 @@ function DashboardRow2() {
           <div className="mb-2 d-flex justify-content-center pb-2">
             <nav aria-label="Page navigation" className="pagination-style-2">
               <ul className="pagination mb-0 flex-wrap">
-                {/* <li
-                  className={`page-item ${currentPage === 1 ? "disabled" : ""}`}
-                >
-                  <a
-                    className="page-link text-primary bg-transparent border-1"
-                    // onClick={handlePrev}
-                  >
-                    Prev
-                  </a>
-                </li> */}
-                {/* {Array.from({ length: totalPages }, (_, i) => ( */}
-                {/* <li
-                    key={i}
-                    className={`page-item ${
-                      currentPage === i + 1 ? "active" : ""
-                    }`}
-                  >
-                    <a
-                      className="page-link"
-                      onClick={() => handlePageClick(i + 1)}
-                    >
-                      {i + 1}
-                    </a>
-                  </li> */}
-                {/* ))} */}
                 <li
                   className={`page-item ${matrixIncome?.length === 0? "disabled":""}`}
                 >
-                  <Link className="page-link text-primary bg-transparent" to="/MatrixTreeUw">
+                  <Link className="page-link text-primary bg-transparent" to="/GlobalIncome">
                     Navigate to Recent Income for full info <i className="fa-solid fa-arrow-trend-up"></i>
                   </Link>
                 </li>
@@ -1635,7 +1608,7 @@ function DashboardRow2() {
             </nav>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* PieChart*/}
       {/* <div className="col-sm-12 col-md-3 col-xxl-3">

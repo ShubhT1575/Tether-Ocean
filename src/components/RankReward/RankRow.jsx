@@ -70,7 +70,7 @@ function RankRow() {
       <div className="col-xl-12">
         <div className="card custom-card overflow-hidden">
           <div className="card-header justify-content-between">
-            <div className="card-title">Rank Reward Data</div>
+            <div className="card-title">Level Team (Uwn4) Data</div>
       {/* <div className="btn-group align-self-end mb-3">
                 <button
                   type=""
@@ -339,7 +339,7 @@ function RankRow() {
 
           <div className="card-footer pagination-body">
             <div className="d-flex align-items-center justify-content-between">
-              <div>Showing {GlobalIncome?.length || 0} Rank Reward</div>
+              <div>Showing {GlobalIncome?.length || 0} Level Team (Uwn4)</div>
               <div>
                 <nav
                   aria-label="Page navigation"
@@ -395,7 +395,7 @@ function RankRow() {
                                 key={slot.id}
                                 className={`product-card bg-crypto-balance bg-success slot-menu ${selectedSlot === slot.id ? "bg-warning":""}`}
                                 onClick={() => setSelectedSlot(slot.id)}
-                                style={{width:"100px"}}
+                                style={{width:"80px"}}
                               >
                                 <div
                                   className="carousel-card-value carousel-card-value carousel-card-value-sucess"

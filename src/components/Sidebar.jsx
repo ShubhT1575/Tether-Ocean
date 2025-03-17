@@ -253,7 +253,7 @@ function Sidebar() {
             </li>
 
 
-            <li className="slide has-sub">
+            {/* <li className="slide has-sub">
               <Link
                 to="/FortuneIncome"
                 className="side-menu__item"
@@ -273,7 +273,7 @@ function Sidebar() {
                 <RiWallet3Line className="side-menu__icon" />
                 <span className="side-menu__label">Recent Income</span>
               </Link>
-            </li>
+            </li> */}
 
             <li className="slide has-sub">
               <Link
