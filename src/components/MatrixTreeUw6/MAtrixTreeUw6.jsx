@@ -344,6 +344,7 @@ const MatrixTree = () => {
               <div className="card-parent-uw6">
                 {boxData?.map((item) => {
                   return (
+                    <Link to="/AutoGlobal" state={item} key={item.id}>
                     <div className={`card-uw6 ${item.isRankAchieved === false ? "disabled-card-uw6":""}`} id={item.id}>
                       <div className="card__content">
                         <div className="head-uw6">{item.slot}</div>
@@ -352,6 +353,7 @@ const MatrixTree = () => {
                         <div className="foot-uw6">{item.totalAmount / 1e18 + "$"}</div>
                       </div>
                     </div>
+                    </Link>
                   );
                 })}
                 {/* <div className="card-uw6">

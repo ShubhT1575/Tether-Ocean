@@ -7,6 +7,11 @@ import axios from "axios";
 import { apiUrl } from "../Config";
 import { FaLongArrowAltDown } from "react-icons/fa";
 import { TbBinaryTree2 } from "react-icons/tb";
+import { getAddressbyRefrralId } from "../../API/Api";
+import toast from "react-hot-toast";
+import { Button, Modal } from "antd";
+import { RxCross2 } from "react-icons/rx";
+import { IoMdSearch } from "react-icons/io";
 
 const MatrixTree = () => {
   const [blocks, setBlocks] = useState([]);
@@ -18,16 +23,56 @@ const MatrixTree = () => {
   const { dashboardData } = useSelector((state) => state.bitgold);
   const { userDetails } = dashboardData;
 
-  const [childAdd, setChildAdd] = useState();
-  const [childUser, setChildUser] = useState();
+  const [childAdd, setChildAdd] = useState("");
+  const [childUser, setChildUser] = useState("");
+  const [search, setSearch] = useState("");
+  const [backId, setBackId] = useState([]);
+  const [backUser, setBackUser] = useState([]);
+  const [open, setOpen] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
+  const showLoading = () => {
+    setOpen(true);
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  };
   
   const handleClick = (childAdd , childUser)=>{
     // console.log(childAdd, "childAdd");
     if(childAdd){
     setChildAdd(childAdd)
     setChildUser(childUser)
+    setBackId((prev)=>[...prev, childAdd]);
+    setBackUser((prev)=>[...prev, childUser]);
     }
     // console.log(childAdd, "childAdd");
+  }
+  
+
+  const handleSearch = async ()=>{
+    console.log("Run")
+    const searchAddress = await getAddressbyRefrralId(search)
+    console.log(searchAddress, "searchAddress");
+    if(searchAddress?.data){
+      setChildAdd(searchAddress?.data);
+      setChildUser(search)
+    }else{
+      toast.error("Please Enter Valid User Id");
+    }
+  }
+
+  const handleBack = ()=>{
+    // const reversed = backId.reverse();
+    // console.log("1+")
+    setChildAdd(backId[backId.length - 2]);
+    setChildUser(backUser[backUser.length - 2]);
+    // console.log(backId[backId.length - 1], "11");
+    backId.pop();
+    backUser.pop();
+    // setChildAdd(backId[-1]);
+    // setChildUser(search)
   }
 
   useEffect(() => {
@@ -52,7 +97,7 @@ const MatrixTree = () => {
           // slot: slot,
         },
       });
-
+      console.log(backId, "backId");
       if (response.data && response.data.mergedRecords) {
         const OriginalData = response.data.mergedRecords.map(
           (item) => item
@@ -63,6 +108,7 @@ const MatrixTree = () => {
         console.log("Block Data:", blockData);
         setLastBlock(response.data.mergedRecords.at(-1)?.place ?? "");
         console.log("Last Block:", lastBlock);
+        // setBackId([...]);
 
         return blockData;
       } else {
@@ -74,19 +120,20 @@ const MatrixTree = () => {
       return [];
     }
   };
-  console.log(lastBlock, "Last Block");
+  // console.log(lastBlock, "Last Block");
 
   useEffect(() => {
     if (address) {
       const getBlocks = async () => {
         const blockData = await fetchBlockData(add, selectedSlot);
+        console.log("red")
         setBlocks(blockData);
       };
 
       getBlocks();
     }
   }, [address, add, selectedSlot, childAdd]);
-  console.log(blocks, "block");
+  // console.log(blocks, "block");
 
 
   const slots = [
@@ -159,6 +206,21 @@ const MatrixTree = () => {
     useEffect(() => {
       if (address) getMatrixIncome();
     }, [address, selectedSlot]);
+    
+    const [details, setDetails] = useState("");
+    const showDetails = async ()=>{
+      showLoading();
+      const res = await axios.get(apiUrl + "/seedetail" , {
+        params:{
+          user: childAdd ? childAdd : address
+        }
+      })
+      console.log(res.data,"details")
+      setDetails(res?.data);
+    }
+    // useEffect(()=>{
+
+    // })
   
   return (
     <>
@@ -185,15 +247,66 @@ const MatrixTree = () => {
           </div>
           <div className="verticals twelve">
             <section className="management-tree card custom-card school-card">
+              {/* <div className="d-flex justify-content-between align-content-center w-100 sm:flex-col"> */}
+
+                            <div className="d-flex" style={{ marginTop: "10px" , width: "300px",alignSelf:"center"}}>
+                              <div className="input-group mb-3">
+                                <div className="input-group-prepend">
+                                  <span
+                                    className="input-group-text btn btn-secondary-gradient btn-wave"
+                                    id="basic-addon3"
+                                    style={{ borderRadius: "0" }}
+                                  >
+                                    Search User
+                                  </span>
+                                </div>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="input-text"
+                                  aria-describedby="basic-addon3"
+                                  value={search}
+                                  onChange={(e) => setSearch(e.target.value)}
+                                  placeholder="User Id"
+                                  // readOnly
+                                  style={{
+                                    borderRadius: "0",
+                                    height: "36px",
+                                    fontSize: "14px",
+                                    overflow: "auto",
+                                  }}
+                                />
+                              </div>
+              
+                              <button
+                                className="btn btn-icon btn-secondary-gradient btn-wave mx-2"
+                                onClick={handleSearch}
+                              >
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                              </button>
+                            </div>
+                           
               
               <div className="btn-group align-self-end mb-3">
                 <button
                   type="button"
                   className="btn btn-success-ghost btn-wave"
+                  // onClick={() => window.history.back()}
                 >
                   {`Re-Entry #${reEntry ?? "0"}`}
                 </button>
               </div>
+              <div className="btn-group align-self-end mb-3">
+                <button
+                  type="button"
+                  className="btn btn-success btn-wave"
+                  onClick={handleBack}
+                >
+                  {/* {`Re-Entry #${reEntry ?? "0"}`} */}
+                  {"<"} Back 
+                </button>
+              </div>
+              {/* </div> */}
 
               {/* <div className="btn-group align-self-end mb-3">
                 <button
@@ -426,7 +539,7 @@ const MatrixTree = () => {
               <div className="mgt-container">
                 <div className="mgt-wrapper">
                   <div className="mgt-item">
-                    <div className="mgt-item-parent">
+                    <div className="mgt-item-parent" onClick={showDetails}>
                       <div className="person">
                         <div className="person-profile"></div>
                         <p className="name">{childAdd ? childUser : userDetails?.userId}</p>
@@ -606,6 +719,29 @@ const MatrixTree = () => {
           </div> */}
         </div>
       </div>
+
+      <Modal
+  open={open}
+  onCancel={() => setOpen(false)}
+  footer={
+    <Button type="primary" onClick={() => setOpen(false)}>
+      <RxCross2 />
+    </Button>
+  }
+  className="custom-dark-modal"
+>
+  <div className="parent">
+    <p>User ID : {details?.userId}</p>
+    <p>User Address : {`${details?.user?.slice(0, 8)}..${details?.user?.slice(-9)}`}</p>
+    <p>Rank : {details?.slot_rank}</p>
+    <p>Created At : {details?.createdAt}</p>
+    <p>Referrer Id : {details?.referrerId}</p>
+    <p>Community Size : {details?.community_size}</p>
+  </div>
+</Modal>
+
+
+
     </>
   );
 };

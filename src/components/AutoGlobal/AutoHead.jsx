@@ -1,6 +1,20 @@
 import React from "react";
 
-function FortuneHead() {
+function FortuneHead(props) {
+  const getSlotName = (slotId) => {
+    const slotNames = [
+      "Saphire", // 1
+      "Ruby",     // 2
+      "Topaz",  // 3
+      "Diamond",  // 4
+      "Green Diamond",    // 5
+      "Blue Diamond",    // 6
+      "Black Diamond",     // 7
+      "Crown Diamond"  // 8
+    ];
+    
+    return slotNames[slotId - 1] || "Unknown";
+  };
   return (
     <div
       className="d-flex align-items-center justify-content-between page-header-breadcrumb flex-wrap gap-2 page-head-breadcrumb"
@@ -13,12 +27,12 @@ function FortuneHead() {
               <a href="#"> Page </a>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
-              Referral Reward
+              {getSlotName(props.data?.slot)}
             </li>
           </ol>
         </nav>
         <h1 className="page-title fw-medium fs-18 mb-0 text-light">
-          Referral Reward
+        {getSlotName(props.data?.slot)}
         </h1>
       </div>
     </div>

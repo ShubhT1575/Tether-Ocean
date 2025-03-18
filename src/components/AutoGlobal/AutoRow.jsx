@@ -4,7 +4,7 @@ import { apiUrl } from "../Config";
 import { useAccount } from "wagmi";
 import { useSelector } from "react-redux";
 
-function CoreBody() {
+function CoreBody(props) {
   const { wallet } = useSelector((state) => state.bitgold);
   const { walletAddress, isConnected } = wallet;
   const address = walletAddress;
@@ -24,18 +24,16 @@ function CoreBody() {
 
   const getCoreIncome = async () => {
     try {
-      const response = await axios.get(apiUrl + "/getRefrealreward", {
+      const response = await axios.get(apiUrl + "/matrixincomeunw6", {
         params: {
-          address: address,
-          page: currentPage,
+          userId: address,
+          level: props?.data?.slot,
         },
       });
       // console.log(response, "]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]");
-      if (response?.data?.status === 200) {
-        setDirectUser(response?.data?.data);
-      } else {
-        setDirectUser([]);
-      }
+      // if (response?.data?.status === 200) {
+        setDirectUser(response?.data?.user_income);
+        console.log(response?.data?.user_income,"response")
     } catch (error) {
       console.error("Error fetching user data:", error.message);
     }
@@ -59,11 +57,11 @@ function CoreBody() {
                 <thead>
                   <tr>
                     <th scope="col">S.NO</th>
-                    <th scope="col">User</th>
+                    <th scope="col">Sender</th>
+                    <th scope="col">Amount</th>
                     <th scope="col">Transaction Hash</th>
-                    <th scope="col">Reward</th>
                     <th scope="col">Time Stamp</th>
-                    <th scope="col">Status</th>
+                    {/* <th scope="col">Status</th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -72,11 +70,10 @@ function CoreBody() {
                       <tr key={item?._id || index}>
                         <td>{index + 1}</td>
                         <td className="text-warning">
-                          {item?.user
-                            ? `${item.user.slice(0, 6)}...${item.user.slice(
-                                -6
-                              )}`
-                            : "N/A"}
+                          {item?.senderId || "N/A"}
+                        </td>
+                        <td className="text-warning">
+                         $ {item?.amount/1e18 || "N/A"}
                         </td>
                         <td>
                           {item?.txHash ? (
@@ -93,17 +90,17 @@ function CoreBody() {
                             "N/A"
                           )}
                         </td>
-                        <td>$ {item?.reward?.toFixed(2) || "0.00"}</td>
+                        {/* <td>$ {item?.reward?.toFixed(2) || "0.00"}</td> */}
                         <td>
                           {item.timestamp
                             ? new Date(item.timestamp).toLocaleString()
                             : "N/A"}
                         </td>
-                        <td>
+                        {/* <td>
                           <span className="badge bg-success-transparent">
                             success
                           </span>
-                        </td>
+                        </td> */}
                       </tr>
                     ))}
                 </tbody>

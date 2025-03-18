@@ -636,7 +636,7 @@ const MatrixTree = () => {
                           {paginatedLevels?.map((item, index) => {
                     return (
                       <tr key={index}>
-                        <td className="text-info">{`${item.sender.slice(0, 7)}.......${item.sender.slice(-5)}`}
+                        <td className="text-info">{`${item.sender.slice(0, 7)}.......${item.sender.slice(-5)}`}  <span className="text-light"> ({item?.senderId})</span>
                         </td>
                         <td className="text-warning">{item?.matrixId}</td>
                         <td className="text-warning">{item?.level}</td>

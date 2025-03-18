@@ -308,7 +308,7 @@ function LevelIncomeBody() {
                     <th scope="col">S.NO</th>
                     <th scope="col">User</th>
                     <th scope="col">Level</th>
-                    <th scope="col">Rank</th>
+                    <th scope="col">Direct Team</th>
                     <th scope="col">Time Stamp</th>
                     {/* <th scope="col">Status</th> */}
                   </tr>
@@ -323,6 +323,7 @@ function LevelIncomeBody() {
                             {item?.level}
                         </td>
                         <td>{item?.rank}</td>
+                        <td>{item?.directteam}</td>
                         <td>{new Date(item?.time).toLocaleString()}</td>
                       </tr>
                     );
