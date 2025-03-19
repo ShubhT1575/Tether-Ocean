@@ -47,7 +47,7 @@ const MatrixTree = () => {
       const response = await axios.get(apiUrl + "/uwn3", {
         params: {
           // user: address,
-          user: childAdd ? childAdd :  "0xfE46ECc6D7c522D9eC1811c247C3709F4E900688",
+          user: childAdd ? childAdd :  address,
           slot: slot,
           cycle: cycle
         },
