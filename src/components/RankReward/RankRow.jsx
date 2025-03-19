@@ -321,7 +321,7 @@ function RankRow() {
                         <td>{index + 1}</td>
                         <td>{item?.userId}</td>
                         <td>
-                            {item?.level}
+                            {item?.level+1}
                         </td>
                         <td>{item?.rank}</td>
                         <td>{item?.directteam}</td>

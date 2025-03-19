@@ -635,7 +635,7 @@ const MatrixTree = () => {
                         <td className="text-light">
                             {item.slotId}
                         </td>
-                        <td className="text-danger">{item.amount/1e18 === 0? "Income used from recycle" : "$" + item.amount/1e18}</td>
+                        <td className="text-danger">{item.amount/1e18 === 0? "Income used for recycle" : "$" + item.amount/1e18}</td>
                         {/* <td>{item.level}</td>
                         <td>{item.totalReward}</td> */}
                         {/* <td>
