@@ -35,12 +35,12 @@ const MatrixTree = () => {
   const [blocks, setBlocks] = useState([]);
   const [slot, setSlot] = useState(1);
   const [reEntry, setReEntry] = useState("");
-  const [selectedSlot,setSelectedSlot] = useState(slot)
+  const [selectedSlot, setSelectedSlot] = useState(slot);
   const { address } = useAccount();
   const [accessAdress, setAccessAddress] = useState("");
   const { dashboardData } = useSelector((state) => state.bitgold);
   const { userDetails } = dashboardData;
-  const [cycle,setCycle] = useState()
+  const [cycle, setCycle] = useState();
 
   const [childAdd, setChildAdd] = useState();
   const [childUser, setChildUser] = useState();
@@ -67,14 +67,14 @@ const MatrixTree = () => {
   const add = address ? address : accessAdress;
   const [lastBlock, setLastBlock] = useState("");
 
-  const fetchBlockData = async (address, slot,cycle) => {
+  const fetchBlockData = async (address, slot, cycle) => {
     try {
       const response = await axios.get(apiUrl + "/uw", {
         params: {
           // user: address,
           user: childAdd ? childAdd : address,
           slot: slot,
-          cycle: cycle
+          cycle: cycle,
         },
       });
 
@@ -98,16 +98,16 @@ const MatrixTree = () => {
     }
   };
   console.log(lastBlock, "Last Block");
-  const [count,setCount] = useState("")
+  const [count, setCount] = useState("");
   useEffect(() => {
     if (address) {
       const getBlocks = async () => {
-        const blockData = await fetchBlockData(add, selectedSlot,cycle);
+        const blockData = await fetchBlockData(add, selectedSlot, cycle);
         setBlocks(blockData);
       };
       getBlocks();
     }
-  }, [address, add, selectedSlot,childAdd,cycle]);
+  }, [address, add, selectedSlot, childAdd, cycle]);
   console.log(blocks, "block");
 
   const slots = [
@@ -129,68 +129,71 @@ const MatrixTree = () => {
     { id: 16, price: 3584, name: "Community Legend" },
   ];
 
-    const [directUser, setDirectUser] = useState([]);
-    // const { address } = useAccount();
-    // console.log(address, 'saadnhufhuh')
-    const itemsPerPage = 8; // Change this to modify items per page
-    const [currentPage, setCurrentPage] = useState(1);
-    const [matrixIncome,setMatrixIncome] = useState([]);
-    // setCycle(reEntry)
-  
-    const totalPages = Math.ceil(matrixIncome.length / itemsPerPage);
-  
-    const paginatedLevels = matrixIncome.slice(
-      (currentPage - 1) * itemsPerPage,
-      currentPage * itemsPerPage
-    );
-  
-    // Handle previous page
-    const handlePreviousPage = () => {
-      if (currentPage > 1) setCurrentPage(currentPage - 1);
-    };
-  
-    // Handle next page
-    const handleNextPage = () => {
-      if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-    };
-  
-  
-    const getMatrixIncome = async () => {
-      try {
-        const response = await axios.get(apiUrl + "/matrixincome", {
-          params: {
-            userId: address,
-            // userId: "0x06e796a9cEa2CA661Ff1B425F4d344BA92996434",
-            matrix: 1,
-            slot: selectedSlot
-          },
-        });
-        if (response?.status === 200) {
-        console.log(response.data.user_income, "repp")
-  
-          setMatrixIncome(response?.data?.user_income || [])
-          console.log(matrixIncome,"Matrix")
-          // setTotalPages(response?.data?.totalPages);
-        } else {
-          setDirectUser([]);
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error.message);
-      }
-    };
-    useEffect(() => {
-      if (address) getMatrixIncome();
-      // setCount(blocks[0]?.cycle);
-    }, [address, selectedSlot]);
+  const [directUser, setDirectUser] = useState([]);
+  // const { address } = useAccount();
+  // console.log(address, 'saadnhufhuh')
+  const itemsPerPage = 8; // Change this to modify items per page
+  const [currentPage, setCurrentPage] = useState(1);
+  const [matrixIncome, setMatrixIncome] = useState([]);
+  // setCycle(reEntry)
 
-    const hasSetCycle = useRef(false); 
+  const totalPages = Math.ceil(matrixIncome.length / itemsPerPage);
 
-    useEffect(() => {
-      if (!hasSetCycle.current && reEntry !== undefined && reEntry !== null & reEntry !== "") {
-        setCycle(reEntry);
-        hasSetCycle.current = true; // Prevent future updates
+  const paginatedLevels = matrixIncome.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  // Handle previous page
+  const handlePreviousPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  // Handle next page
+  const handleNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+  const getMatrixIncome = async () => {
+    try {
+      const response = await axios.get(apiUrl + "/matrixincome", {
+        params: {
+          userId: address,
+          // userId: "0x06e796a9cEa2CA661Ff1B425F4d344BA92996434",
+          matrix: 1,
+          slot: selectedSlot,
+        },
+      });
+      if (response?.status === 200) {
+        console.log(response.data.user_income, "repp");
+
+        setMatrixIncome(response?.data?.user_income || []);
+        console.log(matrixIncome, "Matrix");
+        // setTotalPages(response?.data?.totalPages);
+      } else {
+        setDirectUser([]);
       }
-    }, [reEntry]);
+    } catch (error) {
+      console.error("Error fetching user data:", error.message);
+    }
+  };
+  useEffect(() => {
+    if (address) getMatrixIncome();
+    // setCount(blocks[0]?.cycle);
+  }, [address, selectedSlot]);
+
+  const hasSetCycle = useRef(false);
+
+  useEffect(() => {
+    if (
+      !hasSetCycle.current &&
+      reEntry !== undefined &&
+      (reEntry !== null) & (reEntry !== "")
+    ) {
+      setCycle(reEntry);
+      hasSetCycle.current = true; // Prevent future updates
+    }
+  }, [reEntry]);
 
   return (
     <>
@@ -218,41 +221,40 @@ const MatrixTree = () => {
 
           <div className="verticals twelve">
             <section className="management-tree card custom-card school-card">
-              <div className="btn-group align-self-end mb-3">
-                <button
-                  type="button"
-                  className="btn btn-success-ghost btn-wave"
-                >
-                  {`Re-Entry #${reEntry ?? "0"}`}
-                </button>
-              </div>
-              <div className="btn-group align-self-end mb-3">
-                <button
-                  type="button"
-                  className="btn btn-success btn-wave"
-                >
-                  {`Cycle #${cycle ?? reEntry}`}
-                </button>
-              </div>
-              <div className="btn-group align-self-end mb-3">
-                <button
-                  type="button"
-                  disabled={blocks[0]?.cycle === 0 ? true:false}
-                  className="btn btn-success btn-wave"
-                  style={{marginRight: "12px"}}
-                  onClick={()=>setCycle(reEntry > 0 ? cycle - 1 : "")}
-                >
-                {"<"}
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-success btn-wave"
-                  disabled={cycle === reEntry ? true:false}
-                  style={{marginLeft: "12px"}}
-                  onClick={()=>setCycle(reEntry > 0 ? cycle + 1 : "")}
-                >
-                {">"}
-                </button>
+              <div className="d-flex justify-content-end align-items-center gap-5">
+                <div className="btn-group ">
+                  <button
+                    type="button"
+                    className="btn btn-success-ghost btn-wave"
+                  >
+                    {`Re-Entry #${reEntry ?? "0"}`}
+                  </button>
+                </div>
+                <div className="btn-group ">
+                  <button type="button" className="btn btn-success btn-wave">
+                    {`Cycle #${cycle ?? reEntry}`}
+                  </button>
+                </div>
+                <div className="btn-group ">
+                  <button
+                    type="button"
+                    disabled={blocks[0]?.cycle === 0 ? true : false}
+                    className="btn btn-success btn-wave"
+                    style={{ marginRight: "12px" }}
+                    onClick={() => setCycle(reEntry > 0 ? cycle - 1 : "")}
+                  >
+                    {"<"}
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-success btn-wave"
+                    disabled={cycle === reEntry ? true : false}
+                    style={{ marginLeft: "12px" }}
+                    onClick={() => setCycle(reEntry > 0 ? cycle + 1 : "")}
+                  >
+                    {">"}
+                  </button>
+                </div>
               </div>
 
               {/* <div className="btn-group align-self-end mb-3">
@@ -537,19 +539,21 @@ const MatrixTree = () => {
                               >
                                 <div className="person-profile"></div>
                                 <p className="name">
-                                  {lastBlock >= 2?
-                                    blocks[1]?.userId : "N/A"}
+                                  {lastBlock >= 2 ? blocks[1]?.userId : "N/A"}
                                 </p>
                               </div>
                             </div>
 
                             <div className="mgt-item-child">
-                              <div className="person" onClick={() =>
+                              <div
+                                className="person"
+                                onClick={() =>
                                   handleClick(
                                     blocks[2]?.user,
                                     blocks[2]?.userId
                                   )
-                                }>
+                                }
+                              >
                                 <div className="person-profile"></div>
                                 <p className="name">
                                   {lastBlock == 3 ? blocks[2]?.userId : "N/A"}
@@ -583,7 +587,9 @@ const MatrixTree = () => {
                               <a
                                 href="#"
                                 key={slot.id}
-                                className={`product-card bg-crypto-balance bg-success slot-menu ${selectedSlot === slot.id ? "bg-warning":""}`}
+                                className={`product-card bg-crypto-balance bg-success slot-menu ${
+                                  selectedSlot === slot.id ? "bg-warning" : ""
+                                }`}
                                 onClick={() => setSelectedSlot(slot.id)}
                               >
                                 <div
@@ -626,35 +632,47 @@ const MatrixTree = () => {
                         </thead>
                         <tbody>
                           {paginatedLevels?.map((item, index) => {
-                    return (
-                      <tr key={index}>
-                        <td className="text-info">{`${item.sender.slice(0, 7)}.......${item.sender.slice(-5)}`} <span className="text-light"> ({item?.senderId})</span>
-                        </td>
-                        <td className="text-warning">{item?.matrixId}</td>
-                        {/* <td className="text-warning">{item?.level}</td> */}
-                        <td className="text-light">
-                            {item.slotId}
-                        </td>
-                        <td className="text-danger">{item.amount/1e18 === 0? "Income used for recycle" : "$" + item.amount/1e18}</td>
-                        {/* <td>{item.level}</td>
+                            return (
+                              <tr key={index}>
+                                <td className="text-info">
+                                  {`${item.sender.slice(
+                                    0,
+                                    7
+                                  )}.......${item.sender.slice(-5)}`}{" "}
+                                  <span className="text-light">
+                                    {" "}
+                                    ({item?.senderId})
+                                  </span>
+                                </td>
+                                <td className="text-warning">
+                                  {item?.matrixId}
+                                </td>
+                                {/* <td className="text-warning">{item?.level}</td> */}
+                                <td className="text-light">{item.slotId}</td>
+                                <td className="text-danger">
+                                  {item.amount / 1e18 === 0
+                                    ? "Income used for recycle"
+                                    : "$" + item.amount / 1e18}
+                                </td>
+                                {/* <td>{item.level}</td>
                         <td>{item.totalReward}</td> */}
-                        {/* <td>
+                                {/* <td>
                           <span className="badge bg-success-transparent">
                             success
                           </span>
                         </td> */}
-                      </tr>
-                    );
-                  })}
+                              </tr>
+                            );
+                          })}
                         </tbody>
                       </table>
                       {matrixIncome?.length === 0 && (
-                      <div className=" w-100">
-                        <div className="w-100 text-center p-3">
-                          No Data Found.
+                        <div className=" w-100">
+                          <div className="w-100 text-center p-3">
+                            No Data Found.
+                          </div>
                         </div>
-                      </div>
-                       )} 
+                      )}
                     </div>
                   </div>
 
@@ -690,7 +708,9 @@ const MatrixTree = () => {
                         </nav>
                       </div>
                       <div>
-                        <span>Page {currentPage} of {totalPages}</span>
+                        <span>
+                          Page {currentPage} of {totalPages}
+                        </span>
                       </div>
                     </div>
                   </div>

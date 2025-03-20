@@ -12,6 +12,7 @@ const MatrixTree = () => {
   const [reEntry, setReEntry] = useState("");
   const [selectedSlot,setSelectedSlot] = useState(slot)
   const { address } = useAccount();
+  // const address = "0x712c68Ef82502DFC310dD4aaA6B8050481375bd5"
   const [accessAdress, setAccessAddress] = useState("");
   const { dashboardData } = useSelector((state) => state.bitgold);
   const { userDetails } = dashboardData;
@@ -168,6 +169,72 @@ const MatrixTree = () => {
       }
     }, [reEntry]);
 
+    // for(i = 0; i < blocks.length; i++){
+
+    // }
+    const [place1, setPlace1] = useState({});
+    const [place2, setPlace2] = useState({});
+    const [place3, setPlace3] = useState({});
+    const [place4, setPlace4] = useState({});
+    const [place5, setPlace5] = useState({});
+    const [place6, setPlace6] = useState({});
+    const [place7, setPlace7] = useState({});
+    const [place8, setPlace8] = useState({});
+    const [place9, setPlace9] = useState({});
+    const [place10, setPlace10] = useState({});
+    const [place11, setPlace11] = useState({});
+    const [place12, setPlace12] = useState({});
+    
+
+    useEffect(() => {
+
+      setPlace1({});
+      setPlace2({});
+      setPlace3({});
+      setPlace4({});
+      setPlace5({});
+      setPlace6({});
+      setPlace7({});
+      setPlace8({});
+      setPlace9({});
+      setPlace10({});
+      setPlace11({});
+      setPlace12({});
+
+    blocks.forEach((block) => {
+      if (block.place === 1) {
+        setPlace1(block);
+      } else if (block.place === 2) {
+        setPlace2(block);
+      } else if (block.place === 3) {
+        setPlace3(block);
+      } else if (block.place === 4) {
+        setPlace4(block);
+      } else if (block.place === 5) {
+        setPlace5(block);
+      } else if (block.place === 6) {
+        setPlace6(block);
+      } else if (block.place === 7) {
+        setPlace7(block);
+      } else if (block.place === 8) {
+        setPlace8(block);
+      } else if (block.place === 9) {
+        setPlace9(block);
+      } else if (block.place === 10) {
+        setPlace10(block);
+      } else if (block.place === 11) {
+        setPlace11(block);
+      } else if (block.place === 12) {
+        setPlace12(block);
+      }
+      
+    }
+    );
+    console.log(place1, "place1");
+    console.log(place2, "place2");
+    console.log(place3, "place3");
+    console.log(place4, "place4");
+  },[blocks,address, add, selectedSlot, childAdd,cycle]);
 
   return (
     <>
@@ -194,27 +261,29 @@ const MatrixTree = () => {
           </div>
           <div className="verticals twelve">
             <section className="management-tree card custom-card school-card">
-              
-            <div className="btn-group align-self-end mb-3">
-                <button
+            <div className="d-flex justify-content-end align-items-center gap-3 flex-wrap mb-2" >
+              <div className="btn-group ">
+              <button
                   type="button"
                   className="btn btn-success-ghost btn-wave"
+                  style={{whiteSpace: "nowrap"}}
                 >
                   {`Re-Entry #${reEntry ?? "0"}`}
                 </button>
               </div>
-              <div className="btn-group align-self-end mb-3">
+              <div className="btn-group ">
                 <button
                   type="button"
                   className="btn btn-success btn-wave"
+                  style={{whiteSpace: "nowrap"}}
                 >
                   {`Cycle #${cycle ?? reEntry}`}
                 </button>
               </div>
-              <div className="btn-group align-self-end mb-3">
+              <div className="btn-group ">
                 <button
                   type="button"
-                  disabled={cycle === 0 ? true:false}
+                  disabled={blocks[0]?.cycle === 0 ? true:false}
                   className="btn btn-success btn-wave"
                   style={{marginRight: "12px"}}
                   onClick={()=>setCycle(reEntry > 0 ? cycle - 1 : "")}
@@ -231,6 +300,8 @@ const MatrixTree = () => {
                 {">"}
                 </button>
               </div>
+              </div>
+            
 
               {/* <div className="btn-group align-self-end mb-3">
                 <button
@@ -469,36 +540,36 @@ const MatrixTree = () => {
                         <p className="name">{childAdd ? childUser : userDetails?.userId}</p>
                       </div>
                     </div>
-
+                  {/* { for(let i = 0; i < blocks.length; i++){ */}
                     <div className="mgt-item-children">
                       <div className="mgt-item-child">
                         <div className="mgt-item">
                           <div className="mgt-item-parent">
-                            <div className="person" onClick={()=> handleClick(blocks[0]?.user, blocks[0]?.userId)}>
+                            <div className="person" onClick={()=> handleClick(place1?.user, place1?.userId)}>
                               <div className="person-profile"></div>
-                              <p className="name">{lastBlock >= 1 ? blocks[0]?.userId : "N/A"}</p>
+                              <p className="name">{place1?.userId ?? "N/A"}</p>
                             </div>
                           </div>
 
                           <div className="mgt-item-children">
                             <div className="mgt-item-child">
-                              <div className="person" onClick={()=> handleClick(blocks[3]?.user, blocks[3]?.userId)}>
+                              <div className="person" onClick={()=> handleClick(place4?.user, place4?.userId)}>
                                 <div className="person-profile"></div>
-                                <p className="name">{lastBlock >= 4 ? blocks[3]?.userId : "N/A"}</p>
+                                <p className="name">{place4?.userId ??  "N/A"}</p>
                               </div>
                             </div>
 
                             <div className="mgt-item-child">
-                              <div className="person" onClick={()=> handleClick(blocks[4]?.user, blocks[4]?.userId)}>
+                              <div className="person" onClick={()=> handleClick(place5?.user, place5?.userId)}>
                                 <div className="person-profile"></div>
-                                <p className="name">{lastBlock >= 5 ? blocks[4]?.userId : "N/A"}</p>
+                                <p className="name">{place5?.userId ?? "N/A"}</p>
                               </div>
                             </div>
 
                             <div className="mgt-item-child">
-                              <div className="person" onClick={()=> handleClick(blocks[5]?.user, blocks[5]?.userId)}>
+                              <div className="person" onClick={()=> handleClick(place6?.user, place6?.userId)}>
                                 <div className="person-profile"></div>
-                                <p className="name">{lastBlock >= 6 ? blocks[5]?.userId : "N/A"}</p>
+                                <p className="name">{place6?.userId ?? "N/A"}</p>
                               </div>
                             </div>
                           </div>
@@ -508,31 +579,31 @@ const MatrixTree = () => {
                       <div className="mgt-item-child">
                         <div className="mgt-item">
                           <div className="mgt-item-parent">
-                            <div className="person" onClick={()=> handleClick(blocks[1]?.user, blocks[1]?.userId)}>
+                            <div className="person" onClick={()=> handleClick(place2?.user, place2?.userId)}>
                               <div className="person-profile"></div>
-                              <p className="name">{lastBlock >= 2 ? blocks[1]?.userId : "N/A"}</p>
+                              <p className="name">{place2?.userId ?? "N/A"}</p>
                             </div>
                           </div>
 
                           <div className="mgt-item-children">
                             <div className="mgt-item-child">
-                              <div className="person" onClick={()=> handleClick(blocks[6]?.user, blocks[6]?.userId)}>
+                              <div className="person" onClick={()=> handleClick(place7?.user, place7?.userId)}>
                                 <div className="person-profile"></div>
-                                <p className="name">{lastBlock >= 7 ? blocks[6]?.userId : "N/A"}</p>
+                                <p className="name">{place7?.userId ?? "N/A"}</p>
                               </div>
                             </div>
 
                             <div className="mgt-item-child">
-                              <div className="person" onClick={()=> handleClick(blocks[7]?.user, blocks[7]?.userId)}>
+                              <div className="person" onClick={()=> handleClick(place8?.user, place8?.userId)}>
                                 <div className="person-profile"></div>
-                                <p className="name">{lastBlock >= 8 ? blocks[7]?.userId : "N/A"}</p>
+                                <p className="name">{place8?.userId ?? "N/A"}</p>
                               </div>
                             </div>
 
                             <div className="mgt-item-child">
-                              <div className="person" onClick={()=> handleClick(blocks[8]?.user, blocks[8]?.userId)}>
+                              <div className="person" onClick={()=> handleClick(place9?.user, place9?.userId)}>
                                 <div className="person-profile"></div>
-                                <p className="name">{lastBlock >= 9 ? blocks[8]?.userId : "N/A"}</p>
+                                <p className="name">{place9?.userId ?? "N/A"}</p>
                               </div>
                             </div>
                           </div>
@@ -542,37 +613,38 @@ const MatrixTree = () => {
                       <div class="mgt-item-child">
                         <div class="mgt-item">
                           <div class="mgt-item-parent">
-                            <div class="person" onClick={()=> handleClick(blocks[2]?.user, blocks[2]?.userId)}>
+                            <div class="person" onClick={()=> handleClick(place3?.user, place3?.userId)}>
                               <div className="person-profile"></div>
-                              <p class="name">{lastBlock >= 3 ? blocks[2]?.userId : "N/A"}</p>
+                              <p class="name">{place3?.userId ?? "N/A"}</p>
                             </div>
                           </div>
 
                           <div class="mgt-item-children">
                             <div class="mgt-item-child">
-                              <div class="person" onClick={()=> handleClick(blocks[9]?.user, blocks[9]?.userId)}>
+                              <div class="person" onClick={()=> handleClick(place10?.user, place10?.userId)}>
                                 <div className="person-profile"></div>
-                                <p class="name">{lastBlock >= 10 ? blocks[9]?.userId : "N/A"}</p>
+                                <p class="name">{place10?.userId ?? "N/A"}</p>
                               </div>
                             </div>
 
                             <div class="mgt-item-child">
-                              <div class="person" onClick={()=> handleClick(blocks[10]?.user, blocks[10]?.userId)}>
+                              <div class="person" onClick={()=> handleClick(place11?.user, place11?.userId)}>
                                 <div className="person-profile"></div>
-                                <p class="name">{lastBlock >= 11 ? blocks[10]?.userId : "N/A"}</p>
+                                <p class="name">{place11?.userId ?? "N/A"}</p>
                               </div>
                             </div>
 
                             <div class="mgt-item-child">
-                              <div class="person" onClick={()=> handleClick(blocks[11]?.user, blocks[11]?.userId)}>
+                              <div class="person" onClick={()=> handleClick(place12?.user, place12?.userId)}>
                                 <div className="person-profile"></div>
-                                <p class="name">{lastBlock == 12 ? blocks[11]?.userId : "N/A"}</p>
+                                <p class="name">{place12?.userId ?? "N/A"}</p>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
+                  {/* // }} */}
                   </div>
                 </div>
               </div>

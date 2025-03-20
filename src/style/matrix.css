@@ -84,7 +84,9 @@ h1 {
 .management-tree {
   background-color: #19191c00;
   font-family: inherit;
-  padding: 40px;
+  padding: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   height: 80vh;
   overflow: auto;
 }
