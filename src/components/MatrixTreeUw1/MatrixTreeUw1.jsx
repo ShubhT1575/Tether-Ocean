@@ -11,8 +11,8 @@ const MatrixTree = () => {
   const [slot, setSlot] = useState(1);
   const [reEntry, setReEntry] = useState("");
   const [selectedSlot,setSelectedSlot] = useState(slot)
-  const { address } = useAccount();
-  // const address = "0x712c68Ef82502DFC310dD4aaA6B8050481375bd5"
+  // const { address } = useAccount();
+  const address = "0x712c68Ef82502DFC310dD4aaA6B8050481375bd5"
   const [accessAdress, setAccessAddress] = useState("");
   const { dashboardData } = useSelector((state) => state.bitgold);
   const { userDetails } = dashboardData;
