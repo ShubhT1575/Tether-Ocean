@@ -50,7 +50,7 @@ function DashboardRow1() {
   // const address = walletAddress;
   const { address } = useAccount();
   console.log(dashboardData, "dataaa");
-  const { userDetails,directteam,allteam,directincome,levelIncome,totalincome,todayBonus } = dashboardData;
+  const { userDetails,directteam,allteam,directincome,levelIncome,totalincome,todayBonus , directincomeun5 , levelincomeun5} = dashboardData;
   // const [dashboard, setDashboard] = useState();
   // const [rewardData, setRewardData] = useState();
   // const [isDivEnabled, setIsDivEnabled] = useState(false);
@@ -298,7 +298,7 @@ function DashboardRow1() {
               <div className="card custom-card school-card">
                 <div className="card-body d-flex gap-2 justify-content-between">
                   <div>
-                    <span className="d-block mb-1">Referral Id</span>
+                    <span className="d-block mb-1">Upline Id</span>
                     <h6 className="mb-0 fw-semibold">
                       {userDetails?.referrerId || "No Sponsor"}
                     </h6>
@@ -317,10 +317,10 @@ function DashboardRow1() {
               <div className="card custom-card school-card">
                 <div className="card-body d-flex gap-2 justify-content-between">
                   <div>
-                    <span className="d-block mb-1">Rank</span>
+                    <span className="d-block mb-1">Uwn6 Rank</span>
                     <h6 className="mb-0 fw-semibold">
                       {/* {dashboard && Number(dashboard[3])} */}
-                      {userDetails?.rank || "0"}
+                      {userDetails?.rank || "N/A"}
                     </h6>
                   </div>
                   <div>
@@ -399,14 +399,80 @@ function DashboardRow1() {
                 </div>
               </div>
               <div className="col-sm-6 col-lg-4">
+                      <div className="">
+                        <div className="card custom-card school-card">
+                          <div className="card-body d-flex gap-2 justify-content-between">
+                            <div>
+                              <span className="d-block mb-1">Direct Refferal income</span>
+                              <h6 className="mb-0 fw-semibold">
+                              $ {dashboardData?.sponsor_income}
+                              </h6>
+                            </div>
+                            <div>
+                              <span className="text-primary">
+                                <img src={Ref} alt="" style={{ width: "40px" }} />
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-sm-6 col-lg-4">
+            <div>
+              <div className="card custom-card school-card">
+                <div className="card-body d-flex gap-2 justify-content-between">
+                  <div>
+                    <span className="d-block mb-1">Total Income</span>
+                    <div className="">
+                      <h6 className="mb-0 fw-semibold">
+                        {/* {(dashboard &&
+                          Number(dashboard[11].fundingWallet) /
+                            ("1e" + tokenDecimals)) ||
+                          0.0} */}
+                          $ {totalincome || 0}
+                      </h6>
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-primary2">
+                      <img src={FundWallet} alt="" style={{ width: "40px" }} />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-sm-6 col-lg-4">
+            <div className="">
+              <div className="card custom-card school-card">
+                <div className="card-body d-flex gap-2 justify-content-between">
+                  <div>
+                    <span className="d-block mb-1">Today Income</span>
+                    <div className="">
+                      {" "}
+                      <h6 className="mb-0 fw-semibold">
+                        $ {todayBonus || 0}
+                      </h6>
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-primary">
+                      <img src={Reward} alt="" style={{ width: "40px" }} />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+              <div className="col-sm-6 col-lg-4">
                 <div>
                   <div className="card custom-card school-card">
                     <div className="card-body d-flex gap-2 justify-content-between">
                       <div>
-                        <span className="d-block mb-1">Direct Income</span>
+                        <span className="d-block mb-1">Direct Income (Uwn4)</span>
                         <div className="d-flex gap-3">
                           <h6 className="mb-0 fw-semibold">
-                            {directincome || 0}
+                           $ {directincome || 0}
                           </h6>
                           {/* <span
                             className="text-warning badge bg-success-transparent rounded-pill d-flex align-items-center fs-11 me-0 ms-2 mb-0 px-2"
@@ -447,10 +513,10 @@ function DashboardRow1() {
                   <div className="card custom-card school-card">
                     <div className="card-body d-flex gap-2 justify-content-between">
                       <div>
-                        <span className="d-block mb-1">Level Income</span>
+                        <span className="d-block mb-1">Level Income (Uwn4)</span>
                         <div className="d-flex gap-1">
                           <h6 className="mb-0 fw-semibold">
-                            $ {levelIncome || 0}
+                          $ {levelIncome || 0}
                           </h6>
                           {/* {isDivEnabled && (
                             <span
@@ -472,6 +538,95 @@ function DashboardRow1() {
                   </div>
                 </div>
               </div>
+              <div className="col-sm-6 col-lg-4">
+                <div>
+                  <div className="card custom-card school-card">
+                    <div className="card-body d-flex gap-2 justify-content-between">
+                      <div>
+                        <span className="d-block mb-1">Direct Income (Uwn5)</span>
+                        <div className="d-flex gap-3">
+                          <h6 className="mb-0 fw-semibold">
+                          $ {directincomeun5 || 0}
+                          </h6>
+                          {/* <span
+                            className="text-warning badge bg-success-transparent rounded-pill d-flex align-items-center fs-11 me-0 ms-2 mb-0 px-2"
+                            style={{ cursor: "pointer" }}
+                            // onClick={UserClaimStakeReward}
+                          >
+                            Claim
+                          </span> */}
+                          <div>
+                            <span
+                              className="text-primary1"
+                              style={{
+                                position: "absolute",
+                                right: "15px",
+                                top: "15px",
+                              }}
+                            >
+                              <img
+                                src={FundReward}
+                                alt=""
+                                style={{ width: "40px" }}
+                              />
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <span className="text-primary2">
+                          <img src={Stake} alt="" style={{ width: "40px" }} />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-sm-6 col-lg-4">
+                <div>
+                  <div className="card custom-card school-card">
+                    <div className="card-body d-flex gap-2 justify-content-between">
+                      <div>
+                        <span className="d-block mb-1">Level Income (Uwn5)</span>
+                        <div className="d-flex gap-3">
+                          <h6 className="mb-0 fw-semibold">
+                          $ {levelincomeun5 || 0}
+                          </h6>
+                          {/* <span
+                            className="text-warning badge bg-success-transparent rounded-pill d-flex align-items-center fs-11 me-0 ms-2 mb-0 px-2"
+                            style={{ cursor: "pointer" }}
+                            // onClick={UserClaimStakeReward}
+                          >
+                            Claim
+                          </span> */}
+                          <div>
+                            <span
+                              className="text-primary1"
+                              style={{
+                                position: "absolute",
+                                right: "15px",
+                                top: "15px",
+                              }}
+                            >
+                              <img
+                                src={FundReward}
+                                alt=""
+                                style={{ width: "40px" }}
+                              />
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <span className="text-primary2">
+                          <img src={Stake} alt="" style={{ width: "40px" }} />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
           {/* <div className="col-sm-6 col-lg-6">
             <div
               className="modal fade"
@@ -564,53 +719,7 @@ function DashboardRow1() {
               </div>
             </div>
           </div> */}
-          <div className="col-sm-6 col-lg-4">
-            <div>
-              <div className="card custom-card school-card">
-                <div className="card-body d-flex gap-2 justify-content-between">
-                  <div>
-                    <span className="d-block mb-1">Total Income</span>
-                    <div className="">
-                      <h6 className="mb-0 fw-semibold">
-                        {/* {(dashboard &&
-                          Number(dashboard[11].fundingWallet) /
-                            ("1e" + tokenDecimals)) ||
-                          0.0} */}
-                          $ {totalincome || 0}
-                      </h6>
-                    </div>
-                  </div>
-                  <div>
-                    <span className="text-primary2">
-                      <img src={FundWallet} alt="" style={{ width: "40px" }} />
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-sm-6 col-lg-4">
-            <div className="">
-              <div className="card custom-card school-card">
-                <div className="card-body d-flex gap-2 justify-content-between">
-                  <div>
-                    <span className="d-block mb-1">Today Bonus</span>
-                    <div className="">
-                      {" "}
-                      <h6 className="mb-0 fw-semibold">
-                        $ {todayBonus || 0}
-                      </h6>
-                    </div>
-                  </div>
-                  <div>
-                    <span className="text-primary">
-                      <img src={Reward} alt="" style={{ width: "40px" }} />
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+         
                  <div className="col-sm-6 col-lg-4">
                             <div className="">
                               <div className="card custom-card school-card">
@@ -629,7 +738,7 @@ function DashboardRow1() {
                                         Monthly Activated
                                       </div> */}
                                     </div>
-                                    <h6 className="mb-0 fw-semibold">{dashboardData?.uw_total_income}</h6>
+                                    <h6 className="mb-0 fw-semibold">$ {dashboardData?.uw_total_income}</h6>
                                   </div>
                                   <div>
                                     <span className="text-primary">
@@ -647,7 +756,7 @@ function DashboardRow1() {
                                   <div>
                                     <span className="d-block mb-1">Uwn1  income</span>
                                     <h6 className="mb-0 fw-semibold">
-                                    {dashboardData?.uwn1_total_income}
+                                    $ {dashboardData?.uwn1_total_income}
                                     </h6>
                                   </div>
                                   <div>

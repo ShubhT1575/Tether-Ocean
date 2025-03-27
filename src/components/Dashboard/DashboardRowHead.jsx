@@ -142,7 +142,7 @@ const DashboardRowHead = () => {
     }
   };
 
-  const [slotId, setSlotId] = useState([]);
+  const [slotId, setSlotId] = useState([0]);
 
   const checkActiveSlot = async () => {
     slots.map((slot) => {
@@ -154,7 +154,7 @@ const DashboardRowHead = () => {
         }
       });
     });
-    // console.log(slotId, "idddddddddddddd");
+    console.log(slotId, "idddddddddddddd");
   };
 
   useEffect(() => {

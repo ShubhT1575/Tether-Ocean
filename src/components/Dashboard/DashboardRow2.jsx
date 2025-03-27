@@ -1216,54 +1216,6 @@ function DashboardRow2() {
                 style={{ paddingRight: "0px"}}
               >
                 <div className="col-sm-6 col-lg-4">
-                  <div className="">
-                    <div className="card custom-card school-card">
-                      <div className="card-body d-flex gap-2 justify-content-between">
-                        <div>
-                          <div className="d-flex gap-2">
-                            <span className="d-block mb-1">Uw income</span>
-                            {/* <div
-                              className="text-success badge bg-success-transparent rounded-pill d-flex align-items-center fs-11 me-0 ms-2 mb-0 "
-                              style={{
-                                width: "fit-content",
-                                height: "fit-content",
-                                cursor: "pointer",
-                              }}
-                            >
-                              Monthly Activated
-                            </div> */}
-                          </div>
-                          <h6 className="mb-0 fw-semibold">{dashboardData?.uw_total_income}</h6>
-                        </div>
-                        <div>
-                          <span className="text-primary">
-                            <img src={id} alt="" style={{ width: "40px" }} />
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 col-lg-4">
-                  <div>
-                    <div className="card custom-card school-card">
-                      <div className="card-body d-flex gap-2 justify-content-between">
-                        <div>
-                          <span className="d-block mb-1">Uwn1  income</span>
-                          <h6 className="mb-0 fw-semibold">
-                          {dashboardData?.uwn1_total_income}
-                          </h6>
-                        </div>
-                        <div>
-                          <span className="text-primary1">
-                            <img src={sponsor} alt="" style={{ width: "40px" }} />
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-6 col-lg-4">
                   <div>
                     <div className="card custom-card school-card">
                       <div className="card-body d-flex gap-2 justify-content-between">
@@ -1271,7 +1223,7 @@ function DashboardRow2() {
                           <span className="d-block mb-1">Uwn2  income</span>
                           <h6 className="mb-0 fw-semibold">
                             {/* {dashboard && Number(dashboard[3])} */}
-                            {dashboardData?.uwn2_total_income}
+                            $ {dashboardData?.uwn2_total_income}
                           </h6>
                         </div>
                         <div>
@@ -1290,7 +1242,7 @@ function DashboardRow2() {
                         <div>
                           <span className="d-block mb-1">Uwn3  income</span>
                           <h6 className="mb-0 fw-semibold">
-                          {dashboardData?.uwn3_total_income}
+                          $ {dashboardData?.uwn3_total_income}
                           </h6>
                         </div>
                         <div>
@@ -1309,7 +1261,7 @@ function DashboardRow2() {
                             <div>
                               <span className="d-block mb-1">Uwn4  income</span>
                               <h6 className="mb-0 fw-semibold">
-                              {dashboardData?.uwn4_total_income}
+                              $ {dashboardData?.uwn4_total_income}
                               </h6>
                             </div>
                             <div>
@@ -1329,7 +1281,7 @@ function DashboardRow2() {
                               <span className="d-block mb-1">Uwn5  income</span>
                               <div className="d-flex gap-3">
                                 <h6 className="mb-0 fw-semibold">
-                                {dashboardData?.uwn5_total_income}
+                                $ {dashboardData?.uwn5_total_income}
                                 </h6>
                                 {/* <span
                                   className="text-primary badge bg-success-transparent rounded-pill d-flex align-items-center fs-11 me-0 ms-2 mb-0 px-2"
@@ -1357,7 +1309,7 @@ function DashboardRow2() {
                               <span className="d-block mb-1">Uwn6  income</span>
                               <div className="d-flex gap-3">
                                 <h6 className="mb-0 fw-semibold">
-                                {dashboardData?.uwn6_total_income}
+                                $ {dashboardData?.uwn6_total_income}
                                 </h6>
                                 {/* <span
                                   className="text-warning badge bg-success-transparent rounded-pill d-flex align-items-center fs-11 me-0 ms-2 mb-0 px-2"
@@ -1393,6 +1345,8 @@ function DashboardRow2() {
                         </div>
                       </div>
                     </div>
+
+                    
               
                 {/* <div className="col-sm-6 col-lg-6">
                   <div

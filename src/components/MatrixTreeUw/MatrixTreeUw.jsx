@@ -82,7 +82,7 @@ const MatrixTree = () => {
         const OriginalData = response.data.matrixstruct.map((item) => item);
         console.log(response.data.reenty, "rentry");
         setReEntry(response?.data?.reenty ?? "");
-        const blockData = [...OriginalData].reverse();
+        const blockData = [...OriginalData];
         console.log("Block Data:", blockData);
         setLastBlock(response.data.matrixstruct.at(-1)?.place ?? "");
         console.log("Last Block:", lastBlock);

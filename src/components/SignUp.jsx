@@ -46,7 +46,7 @@ function SignUp() {
     );
   }, [dispatch, chainId, address, isConnected, isDisconnected]);
 
-  const [packageValue, setPackageValue] = useState("7");
+  const [packageValue, setPackageValue] = useState("3");
   const [inputRef, setInputRef] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [refFromUrl, setRefFromUrl] = useState();
