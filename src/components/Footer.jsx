@@ -8,7 +8,7 @@ function Footer() {
           <span className="text-light">
             Copyright © <span id="year"></span>
             <a href="#" className="text-info fw-medium">
-            TETHER OCEAN.
+            USDT OCEAN.
             </a>
             {" "}All rights reserved.
           </span>

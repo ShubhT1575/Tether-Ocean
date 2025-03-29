@@ -4,7 +4,7 @@ import App from "./App.jsx";
 import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
-import { opBNBTestnet } from "wagmi/chains";
+import { opBNB, opBNBTestnet } from "wagmi/chains";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import { store } from "./Redux/Store.js";
@@ -14,7 +14,7 @@ import { Provider } from "react-redux";
 export const config = getDefaultConfig({
   appName: "My RainbowKit App",
   projectId: "my project Id",
-  chains: [opBNBTestnet],
+  chains: [opBNB],
   ssr: true,
 });
 
