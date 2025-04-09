@@ -26,7 +26,7 @@ function Homepage() {
   useEffect(() => {
     const calculateTimeLeft = () => {
       try {
-        const targetDate = new Date('April 9, 2025 11:00:00').getTime();
+        const targetDate = new Date('April 10, 2025 11:00:00').getTime();
         const now = new Date().getTime();
         const difference = targetDate - now;
 
@@ -88,7 +88,7 @@ function Homepage() {
               onClick={closeModal}
               style={{
                 position: 'absolute',
-                top: '15px',
+                top: '5px',
                 right: '15px',
                 background: 'none',
                 border: 'none',
@@ -106,19 +106,18 @@ function Homepage() {
               marginBottom: '20px',
               fontWeight: 'bold'
             }}>
-              🚀 Exciting Updates Coming Soon! 🚀
+             We are Live Now! 🚀
             </h2>
-            
-            <p style={{
+            {/* <p style={{
               color: '#fff',
               fontSize: '1.1rem',
               marginBottom: '30px',
               lineHeight: '1.6'
             }}>
               We're working on something amazing for you! Mark your calendar for April 9, 2025 at 11 AM.
-            </p>
+            </p> */}
             
-            <div style={{
+            {/* <div style={{
               display: 'flex',
               justifyContent: 'center',
               gap: '15px',
@@ -161,9 +160,9 @@ function Homepage() {
                 <div style={{ fontSize: '2rem', fontWeight: '800', color: '#6e00ff' }}>{timeLeft.seconds}</div>
                 <div style={{ fontSize: '0.9rem', color: '#aaa' }}>SECONDS</div>
               </div>
-            </div>
+            </div> */}
             
-            <button 
+            {/* <button 
               onClick={closeModal}
               style={{
                 background: 'linear-gradient(90deg, #ff5183, #6e00ff)',
@@ -182,7 +181,7 @@ function Homepage() {
               }}
             >
               Got It! I'm Excited
-            </button>
+            </button> */}
           </div>
         </div>
       )}

@@ -172,7 +172,7 @@ export const getOwner = async () => {
   const result = await readContract(config, {
     abi: ContractABI,
     address: ContractAddress,
-    functionName: "owner",
+    functionName: "usdtocean",
     args: [],
   });
   return result;
