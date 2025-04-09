@@ -132,7 +132,7 @@ function SignIn() {
                 Login to Your Account
               </h6>
               <p className="text-fixed-white mb-1 op-6">
-                Welcome to the TETHER OCEAN Dashboard. Please log in to securely
+                Welcome to the TREND OCEAN Dashboard. Please log in to securely
                 manage your administrative tools and oversee platform
                 activities. Your credentials ensure system integrity and
                 functionality.

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./css/Home.css";
 import "./css/style.css";
 import "./css/responsive.css";
@@ -14,11 +14,178 @@ import { Link } from "react-router-dom";
 
 function Homepage() {
   const [fullheight, setFullHeight] = useState(false);
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
+  const [showModal, setShowModal] = useState(true);
   const apkURL = `${window.location.origin}/apk/app-release (1).apk`;
 
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      try {
+        const targetDate = new Date('April 9, 2025 11:00:00').getTime();
+        const now = new Date().getTime();
+        const difference = targetDate - now;
+
+        if (difference > 0) {
+          setTimeLeft({
+            days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+            hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+            minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+            seconds: Math.floor((difference % (1000 * 60)) / 1000)
+          });
+        } else {
+          setShowModal(false);
+        }
+      } catch (error) {
+        console.error("Error in countdown calculation:", error);
+        setShowModal(false);
+      }
+    };
+
+    const timer = setInterval(calculateTimeLeft, 1000);
+    calculateTimeLeft(); // Initial call
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   return (
     <div id="top" style={{ overflow: "hidden" }} >
+          {/* Modal Popup */}
+          {showModal && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0,0,0,0.8)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 9999,
+          backdropFilter: 'blur(5px)'
+        }}>
+          <div style={{
+            background: 'linear-gradient(135deg, #1a1a2e, #16213e)',
+            padding: '30px',
+            borderRadius: '15px',
+            maxWidth: '600px',
+            width: '90%',
+            boxShadow: '0 10px 25px rgba(0,0,0,0.3)',
+            border: '1px solid rgba(255,255,255,0.1)',
+            textAlign: 'center',
+            position: 'relative'
+          }}>
+            <button 
+              onClick={closeModal}
+              style={{
+                position: 'absolute',
+                top: '15px',
+                right: '15px',
+                background: 'none',
+                border: 'none',
+                color: '#fff',
+                fontSize: '1.5rem',
+                cursor: 'pointer'
+              }}
+            >
+              ×
+            </button>
+            
+            <h2 style={{
+              color: '#ff5183',
+              fontSize: '2rem',
+              marginBottom: '20px',
+              fontWeight: 'bold'
+            }}>
+              🚀 Exciting Updates Coming Soon! 🚀
+            </h2>
+            
+            <p style={{
+              color: '#fff',
+              fontSize: '1.1rem',
+              marginBottom: '30px',
+              lineHeight: '1.6'
+            }}>
+              We're working on something amazing for you! Mark your calendar for April 9, 2025 at 11 AM.
+            </p>
+            
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '15px',
+              flexWrap: 'wrap',
+              marginBottom: '30px'
+            }}>
+              <div style={{
+                background: 'rgba(255,255,255,0.1)',
+                padding: '15px',
+                borderRadius: '10px',
+                minWidth: '80px'
+              }}>
+                <div style={{ fontSize: '2rem', fontWeight: '800', color: '#6e00ff' }}>{timeLeft.days}</div>
+                <div style={{ fontSize: '0.9rem', color: '#aaa' }}>DAYS</div>
+              </div>
+              <div style={{
+                background: 'rgba(255,255,255,0.1)',
+                padding: '15px',
+                borderRadius: '10px',
+                minWidth: '80px'
+              }}>
+                <div style={{ fontSize: '2rem', fontWeight: '800', color: '#6e00ff' }}>{timeLeft.hours}</div>
+                <div style={{ fontSize: '0.9rem', color: '#aaa' }}>HOURS</div>
+              </div>
+              <div style={{
+                background: 'rgba(255,255,255,0.1)',
+                padding: '15px',
+                borderRadius: '10px',
+                minWidth: '80px'
+              }}>
+                <div style={{ fontSize: '2rem', fontWeight: '800', color: '#6e00ff' }}>{timeLeft.minutes}</div>
+                <div style={{ fontSize: '0.9rem', color: '#aaa' }}>MINUTES</div>
+              </div>
+              <div style={{
+                background: 'rgba(255,255,255,0.1)',
+                padding: '15px',
+                borderRadius: '10px',
+                minWidth: '80px'
+              }}>
+                <div style={{ fontSize: '2rem', fontWeight: '800', color: '#6e00ff' }}>{timeLeft.seconds}</div>
+                <div style={{ fontSize: '0.9rem', color: '#aaa' }}>SECONDS</div>
+              </div>
+            </div>
+            
+            <button 
+              onClick={closeModal}
+              style={{
+                background: 'linear-gradient(90deg, #ff5183, #6e00ff)',
+                color: 'white',
+                border: 'none',
+                padding: '12px 30px',
+                borderRadius: '50px',
+                fontSize: '1rem',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                ':hover': {
+                  transform: 'scale(1.05)',
+                  boxShadow: '0 5px 15px rgba(110, 0, 255, 0.4)'
+                }
+              }}
+            >
+              Got It! I'm Excited
+            </button>
+          </div>
+        </div>
+      )}
       <Header />
 
 
@@ -700,7 +867,7 @@ function Homepage() {
               </div>
               <div className="col-lg-6 d-flex justify-content-end footer-text-landing">
                 <p className="copyright-text">
-                  Copyright © USDT OCEAN 2025 All rights
+                  Copyright © TREND OCEAN 2025 All rights
                   reserved.
                 </p>
 

@@ -50,7 +50,7 @@ function SignUp() {
   const [inputRef, setInputRef] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [refFromUrl, setRefFromUrl] = useState();
-  const [showDiv, setShowDiv] = useState(false);
+  const [showDiv, setShowDiv] = useState(true);
   const [isCheckedYes, setIsCheckedYes] = useState(false);
   const [isCheckedNo, setIsCheckedNo] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
@@ -140,9 +140,13 @@ function SignUp() {
         setIsLoading(false);
         return toast.error("Please connect wallet");
       }
-      if (!isCheckedYes && !isCheckedNo) {
+      // if (!isCheckedYes && !isCheckedNo) {
+      //   setIsLoading(false);
+      //   return toast.error("Please select checkbox !");
+      // }
+      if(!refAddress){
         setIsLoading(false);
-        return toast.error("Please select checkbox !");
+        return toast.error("Please Enter Sponsor Address");
       }
       if (!packageValue) {
         setIsLoading(false);
@@ -166,7 +170,7 @@ function SignUp() {
         console.log(getRefAddress?.data, "getRefAddress");
         if (getRefAddress?.status != 200) {
           setIsLoading(false);
-          toast.error("hello");
+          toast.error("Invalid Sponsor Address");
           return;
         }
       }
@@ -357,7 +361,7 @@ function SignUp() {
                         </div>
                       </div> */}
                     </div>
-                    <div className="text-center">
+                    {/* <div className="text-center">
                       <p className=" mt-3 mb-0 ">Have any Sponsor Id ?{"  "}</p>
                       <div>
                         <div
@@ -397,8 +401,8 @@ function SignUp() {
                           </label>
                         </div>
                       </div>
-                    </div>
-                    <div className="col-lg-12">
+                    </div> */}
+                    {/* <div className="col-lg-12">
                       <div className="d-flex align-items-center gap-3">
                         <input
                           className="form-check-input"
@@ -422,8 +426,8 @@ function SignUp() {
                           </Link>
                         </div>
                       </div>
-                    </div>
-                    <div className="cc mt-4 d-grid btn btn-outline-primary address-notconnected-btn d-flex justify-content-center align-content-center text-primary">
+                    </div> */}
+                    <div className="cc mt-5 d-grid btn btn-outline-primary address-notconnected-btn d-flex justify-content-center align-content-center text-primary">
                       {isLoading ? (
                         <span
                           className="spinner-border text-light"
@@ -491,7 +495,7 @@ function SignUp() {
                     Register Your Account
                   </h6>
                   <p className="text-fixed-white mb-1 op-6">
-                    Welcome to the TETHER OCEAN Dashboard. Please Register to
+                    Welcome to the TREND OCEAN Dashboard. Please Register to
                     securely manage your administrative tools and oversee
                     platform activities. Your credentials ensure system
                     integrity and functionality.
