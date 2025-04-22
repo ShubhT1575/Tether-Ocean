@@ -14,7 +14,7 @@ import { Provider } from "react-redux";
 export const config = getDefaultConfig({
   appName: "My RainbowKit App",
   projectId: "my project Id",
-  chains: [opBNB],
+  chains: [opBNBTestnet],
   ssr: true,
 });
 
